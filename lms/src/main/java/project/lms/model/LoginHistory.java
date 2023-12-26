@@ -17,11 +17,11 @@ public class LoginHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long logID;
+    private Long logId;
 
     @ManyToOne
-    @JoinColumn(name = "memberID", nullable = false)
-    private Member memberID;
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member;
 
     @Column(nullable = false)
     private LocalDateTime loginTime;
@@ -35,29 +35,29 @@ public class LoginHistory {
     }
 
     // 전체 생성자
-	public LoginHistory(Long logID, Member memberID, LocalDateTime loginTime, String ipAddress) {
+	public LoginHistory(Long logId, Member member, LocalDateTime loginTime, String ipAddress) {
 		super();
-		this.logID = logID;
-		this.memberID = memberID;
+		this.logId = logId;
+		this.member = member;
 		this.loginTime = loginTime;
 		this.ipAddress = ipAddress;
 	}
-	
+
     // Getters and Setters
-	public Long getLogID() {
-		return logID;
+	public Long getLogId() {
+		return logId;
 	}
 
-	public void setLogID(Long logID) {
-		this.logID = logID;
+	public void setLogId(Long logId) {
+		this.logId = logId;
 	}
 
-	public Member getMemberID() {
-		return memberID;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberID(Member memberID) {
-		this.memberID = memberID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public LocalDateTime getLoginTime() {
@@ -74,6 +74,6 @@ public class LoginHistory {
 
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
-	}
-    
+	}	
+
 }

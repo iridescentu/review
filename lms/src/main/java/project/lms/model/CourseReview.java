@@ -19,15 +19,15 @@ public class CourseReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewID;
+    private Long reviewId;
 
     @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 여러 회원 ID를 가질 수 있음
-    @JoinColumn(name = "memberID", nullable = false)
-    private Member memberID;
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member;
 
     @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 여러 강의 ID를 가질 수 있음
-    @JoinColumn(name = "courseID", nullable = false)
-    private Course courseID;
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
 
     @Column(nullable = false)
     private Integer rating;
@@ -45,40 +45,40 @@ public class CourseReview {
     }
 
     // 전체 생성자
-	public CourseReview(Long reviewID, Member memberID, Course courseID, Integer rating, String comment,
+	public CourseReview(Long reviewId, Member member, Course course, Integer rating, String comment,
 			LocalDateTime reviewDate) {
 		super();
-		this.reviewID = reviewID;
-		this.memberID = memberID;
-		this.courseID = courseID;
+		this.reviewId = reviewId;
+		this.member = member;
+		this.course = course;
 		this.rating = rating;
 		this.comment = comment;
 		this.reviewDate = reviewDate;
 	}
 
     // Getters and Setters
-	public Long getReviewID() {
-		return reviewID;
+	public Long getReviewId() {
+		return reviewId;
 	}
 
-	public void setReviewID(Long reviewID) {
-		this.reviewID = reviewID;
+	public void setReviewId(Long reviewId) {
+		this.reviewId = reviewId;
 	}
 
-	public Member getMemberID() {
-		return memberID;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberID(Member memberID) {
-		this.memberID = memberID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	public Course getCourseID() {
-		return courseID;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setCourseID(Course courseID) {
-		this.courseID = courseID;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public Integer getRating() {
@@ -103,6 +103,5 @@ public class CourseReview {
 
 	public void setReviewDate(LocalDateTime reviewDate) {
 		this.reviewDate = reviewDate;
-	}	
-   
+	}   
 }

@@ -19,11 +19,11 @@ public class Withdrawal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long withdrawalID; // 탈퇴 ID는 int 형태로 사용
+    private Long withdrawalId; // 탈퇴 ID는 int 형태로 사용
 
     @ManyToOne
-    @JoinColumn(name = "memberID", nullable = false)
-    private Member memberID; // 고유한 회원 ID
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member; // 고유한 회원 ID
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,29 +38,29 @@ public class Withdrawal {
     }
 
     // 전체 생성자
-	public Withdrawal(Long withdrawalID, Member memberID, LocalDateTime withdrawalTime, String reason) {
+	public Withdrawal(Long withdrawalId, Member member, LocalDateTime withdrawalTime, String reason) {
 		super();
-		this.withdrawalID = withdrawalID;
-		this.memberID = memberID;
+		this.withdrawalId = withdrawalId;
+		this.member = member;
 		this.withdrawalTime = withdrawalTime;
 		this.reason = reason;
 	}
 
     // Getters and Setters
-	public Long getWithdrawalID() {
-		return withdrawalID;
+	public Long getWithdrawalId() {
+		return withdrawalId;
 	}
 
-	public void setWithdrawalID(Long withdrawalID) {
-		this.withdrawalID = withdrawalID;
+	public void setWithdrawalId(Long withdrawalId) {
+		this.withdrawalId = withdrawalId;
 	}
 
-	public Member getMemberID() {
-		return memberID;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberID(Member memberID) {
-		this.memberID = memberID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public LocalDateTime getWithdrawalTime() {
@@ -77,6 +77,5 @@ public class Withdrawal {
 
 	public void setReason(String reason) {
 		this.reason = reason;
-	}
-    
+	}    
 }

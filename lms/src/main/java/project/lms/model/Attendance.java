@@ -19,15 +19,15 @@ public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long attendanceID;
+    private Long attendanceId;
 
     @ManyToOne // ManyToOne 관계 설정: 여러 개의 출석 기록은 하나의 회원 ID를 가질 수 있음
-    @JoinColumn(name = "memberID", nullable = false)
-    private Member memberID;
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member;
 
     @ManyToOne // ManyToOne 관계 설정: 여러 개의 출석 기록은 하나의 강의 ID를 가질 수 있음
-    @JoinColumn(name = "courseID", nullable = false)
-    private Course courseID;
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
 
     @Column(nullable = false, length = 50)
     private String status;
@@ -46,40 +46,40 @@ public class Attendance {
 	}
 
     // 전체 생성자
-	public Attendance(Long attendanceID, Member memberID, Course courseID, String status, LocalDateTime checkInTime,
+	public Attendance(Long attendanceId, Member member, Course course, String status, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime) {
 		super();
-		this.attendanceID = attendanceID;
-		this.memberID = memberID;
-		this.courseID = courseID;
+		this.attendanceId = attendanceId;
+		this.member = member;
+		this.course = course;
 		this.status = status;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
 	}
 
 	// Getters and Setters
-	public Long getAttendanceID() {
-		return attendanceID;
+	public Long getAttendanceId() {
+		return attendanceId;
 	}
 
-	public void setAttendanceID(Long attendanceID) {
-		this.attendanceID = attendanceID;
+	public void setAttendanceId(Long attendanceId) {
+		this.attendanceId = attendanceId;
 	}
 
-	public Member getMemberID() {
-		return memberID;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberID(Member memberID) {
-		this.memberID = memberID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	public Course getCourseID() {
-		return courseID;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setCourseID(Course courseID) {
-		this.courseID = courseID;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public String getStatus() {

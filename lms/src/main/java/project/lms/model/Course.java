@@ -19,11 +19,11 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseID;
+    private Long courseId;
 
     @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 여러 회원 ID를 가질 수 있음
-    @JoinColumn(name = "memberID", nullable = false)
-    private Member memberID;
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member;
 
     @Column(nullable = false, length = 150)
     private String courseName;
@@ -32,8 +32,8 @@ public class Course {
     private String description;
 
     @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 여러 강사 ID를 가질 수 있음
-    @JoinColumn(name = "instructorID", nullable = false)
-    private Instructor instructorID;
+    @JoinColumn(name = "instructorId", nullable = false)
+    private Instructor instructor;
 
     @Column(nullable = false)
     private Integer durationMins;
@@ -56,14 +56,14 @@ public class Course {
     }
 
     // 전체 생성자
-	public Course(Long courseID, Member memberID, String courseName, String description, Instructor instructorID,
+	public Course(Long courseId, Member member, String courseName, String description, Instructor instructor,
 			Integer durationMins, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime deadline) {
 		super();
-		this.courseID = courseID;
-		this.memberID = memberID;
+		this.courseId = courseId;
+		this.member = member;
 		this.courseName = courseName;
 		this.description = description;
-		this.instructorID = instructorID;
+		this.instructor = instructor;
 		this.durationMins = durationMins;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -71,20 +71,20 @@ public class Course {
 	}
 
     // Getters and Setters
-	public Long getCourseID() {
-		return courseID;
+	public Long getCourseId() {
+		return courseId;
 	}
 
-	public void setCourseID(Long courseID) {
-		this.courseID = courseID;
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
 
-	public Member getMemberID() {
-		return memberID;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberID(Member memberID) {
-		this.memberID = memberID;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public String getCourseName() {
@@ -103,12 +103,12 @@ public class Course {
 		this.description = description;
 	}
 
-	public Instructor getInstructorID() {
-		return instructorID;
+	public Instructor getInstructor() {
+		return instructor;
 	}
 
-	public void setInstructorID(Instructor instructorID) {
-		this.instructorID = instructorID;
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
 	}
 
 	public Integer getDurationMins() {
@@ -141,6 +141,6 @@ public class Course {
 
 	public void setDeadline(LocalDateTime deadline) {
 		this.deadline = deadline;
-	}
+	}	
 
 }

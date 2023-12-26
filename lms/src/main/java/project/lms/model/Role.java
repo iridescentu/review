@@ -16,7 +16,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleID; // 역할의 고유 ID
+    private Long roleId; // 역할의 고유 ID
 
     @Column(nullable = false, length = 50)
     private String roleName; // 역할 이름
@@ -27,19 +27,19 @@ public class Role {
     }
 
     // 전체 생성자
-	public Role(Long roleID, String roleName) {
+	public Role(Long roleId, String roleName) {
 		super();
-		this.roleID = roleID;
+		this.roleId = roleId;
 		this.roleName = roleName;
 	}
 
     // Getters and Setters
-	public Long getRoleID() {
-		return roleID;
+	public Long getRoleId() {
+		return roleId;
 	}
 
-	public void setRoleID(Long roleID) {
-		this.roleID = roleID;
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getRoleName() {

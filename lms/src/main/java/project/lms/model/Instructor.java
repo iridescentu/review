@@ -10,7 +10,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "instructors", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "loginID"),
+        @UniqueConstraint(columnNames = "loginId"),
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phoneNum")
 })
@@ -19,10 +19,10 @@ public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long instructorID;
+    private Long instructorId;
 
-    @Column(nullable = false, unique = true, length = 50)
-    private String loginID;
+    @Column(nullable = false, length = 50)
+    private String loginId;
 
     @Column(nullable = false, length = 255)
     private String password;
@@ -30,10 +30,10 @@ public class Instructor {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, length = 20)
     private String phoneNum;
 
     @Column(nullable = true)
@@ -48,11 +48,11 @@ public class Instructor {
     }
 
     // 전체 생성자
-	public Instructor(Long instructorID, String loginID, String password, String name, String email, String phoneNum,
+	public Instructor(Long instructorId, String loginId, String password, String name, String email, String phoneNum,
 			String resume, String photo) {
 		super();
-		this.instructorID = instructorID;
-		this.loginID = loginID;
+		this.instructorId = instructorId;
+		this.loginId = loginId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
@@ -62,20 +62,20 @@ public class Instructor {
 	}
 
     // Getters and Setters
-	public Long getInstructorID() {
-		return instructorID;
+	public Long getInstructorId() {
+		return instructorId;
 	}
 
-	public void setInstructorID(Long instructorID) {
-		this.instructorID = instructorID;
+	public void setInstructorId(Long instructorId) {
+		this.instructorId = instructorId;
 	}
 
-	public String getLoginID() {
-		return loginID;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setLoginID(String loginID) {
-		this.loginID = loginID;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 	public String getPassword() {
@@ -124,6 +124,6 @@ public class Instructor {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}	
+	}
 	
 }
