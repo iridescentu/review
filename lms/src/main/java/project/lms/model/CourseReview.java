@@ -21,11 +21,11 @@ public class CourseReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewID;
 
-    @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 하나의 회원 ID를 가질 수 있음
+    @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 여러 회원 ID를 가질 수 있음
     @JoinColumn(name = "memberID", nullable = false)
     private Member memberID;
 
-    @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 하나의 강의 ID를 가질 수 있음
+    @ManyToOne // ManyToOne 관계 설정: 하나의 리뷰는 여러 강의 ID를 가질 수 있음
     @JoinColumn(name = "courseID", nullable = false)
     private Course courseID;
 

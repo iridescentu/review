@@ -21,7 +21,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseID;
 
-    @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 하나의 회원 ID를 가질 수 있음
+    @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 여러 회원 ID를 가질 수 있음
     @JoinColumn(name = "memberID", nullable = false)
     private Member memberID;
 
@@ -31,7 +31,7 @@ public class Course {
     @Column(nullable = true, length = 500) // 강의 소개는 필수가 아닐 수 있음
     private String description;
 
-    @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 하나의 강사 ID를 가질 수 있음
+    @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 여러 강사 ID를 가질 수 있음
     @JoinColumn(name = "instructorID", nullable = false)
     private Instructor instructorID;
 

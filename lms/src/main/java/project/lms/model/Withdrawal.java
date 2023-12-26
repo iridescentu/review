@@ -19,7 +19,7 @@ public class Withdrawal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long withdrawalID; // 탈퇴 ID는 int 형태로 사용합니다.
+    private Long withdrawalID; // 탈퇴 ID는 int 형태로 사용
 
     @ManyToOne
     @JoinColumn(name = "memberID", nullable = false)
