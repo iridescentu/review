@@ -47,7 +47,7 @@ public class Course {
     private LocalDateTime endDate;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIME) // 강의 기한은 시간만 포함하므로 TIME 사용
+    @Temporal(TemporalType.TIMESTAMP) // 강의 기한은 시간만 포함하므로 TIME 사용
     private LocalDateTime deadline;
 
     // 기본 생성자
