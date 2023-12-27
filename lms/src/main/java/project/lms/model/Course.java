@@ -46,10 +46,6 @@ public class Course {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime endDate;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP) // 강의 기한은 시간만 포함하므로 TIME 사용
-    private LocalDateTime deadline;
-
     // 기본 생성자
     public Course() {
         super();
@@ -57,7 +53,7 @@ public class Course {
 
     // 전체 생성자
 	public Course(Long courseId, Member member, String courseName, String description, Instructor instructor,
-			Integer durationMins, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime deadline) {
+			Integer durationMins, LocalDateTime startDate, LocalDateTime endDate) {
 		super();
 		this.courseId = courseId;
 		this.member = member;
@@ -67,7 +63,6 @@ public class Course {
 		this.durationMins = durationMins;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.deadline = deadline;
 	}
 
     // Getters and Setters
@@ -134,13 +129,5 @@ public class Course {
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
-
-	public LocalDateTime getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(LocalDateTime deadline) {
-		this.deadline = deadline;
-	}	
 
 }
