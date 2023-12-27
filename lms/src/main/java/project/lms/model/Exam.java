@@ -19,11 +19,11 @@ public class Exam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long examID;
+    private Long examId;
 
     @ManyToOne
-    @JoinColumn(name = "courseID", nullable = false)
-    private Course course;
+    @JoinColumn(name = "contentId", nullable = false)
+    private Content content;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,39 +53,41 @@ public class Exam {
 
     // 기본 생성자
     public Exam() {
+    	
     }
 
     // 전체 생성자
-    public Exam(Long examID, Course course, Timestamp examDate, Integer numQuestions, Integer durationMins,
-                Integer passingScore, Boolean examIsActive, Timestamp examSubmissionTime, 
-                Boolean examCompletionStatus, Integer examScore) {
-        this.examID = examID;
-        this.course = course;
-        this.examDate = examDate;
-        this.numQuestions = numQuestions;
-        this.durationMins = durationMins;
-        this.passingScore = passingScore;
-        this.examIsActive = examIsActive;
-        this.examSubmissionTime = examSubmissionTime;
-        this.examCompletionStatus = examCompletionStatus;
-        this.examScore = examScore;
-    }
+	public Exam(Long examId, Content content, Timestamp examDate, Integer numQuestions, Integer durationMins,
+			Integer passingScore, Boolean examIsActive, Timestamp examSubmissionTime, Boolean examCompletionStatus,
+			Integer examScore) {
+		super();
+		this.examId = examId;
+		this.content = content;
+		this.examDate = examDate;
+		this.numQuestions = numQuestions;
+		this.durationMins = durationMins;
+		this.passingScore = passingScore;
+		this.examIsActive = examIsActive;
+		this.examSubmissionTime = examSubmissionTime;
+		this.examCompletionStatus = examCompletionStatus;
+		this.examScore = examScore;
+	}
 
     // Getters and Setters
-	public Long getExamID() {
-		return examID;
+	public Long getExamId() {
+		return examId;
 	}
 
-	public void setExamID(Long examID) {
-		this.examID = examID;
+	public void setExamId(Long examId) {
+		this.examId = examId;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Content getContent() {
+		return content;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setContent(Content content) {
+		this.content = content;
 	}
 
 	public Timestamp getExamDate() {
@@ -151,5 +153,6 @@ public class Exam {
 	public void setExamScore(Integer examScore) {
 		this.examScore = examScore;
 	}
+	
 
 }

@@ -22,8 +22,8 @@ public class Assignment {
     private Long assignmentId;
     
     @ManyToOne
-    @JoinColumn(name = "courseId", nullable = false)
-    private Course course;
+    @JoinColumn(name = "contentId", nullable = false)
+    private Content content;
     
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -57,11 +57,11 @@ public class Assignment {
     }
 
     // 전체 생성자
-    public Assignment(Long assignmentId, Course course, Timestamp dueDate, String assignmentTitle, String description, 
+    public Assignment(Long assignmentId, Content content, Timestamp dueDate, String assignmentTitle, String description, 
                       Integer passingScore, boolean assignIsActive, Timestamp assignSubmissionTime, 
                       boolean assignCompletionStatus, Integer assignScore) {
         this.assignmentId = assignmentId;
-        this.course = course;
+        this.content = content;
         this.dueDate = dueDate;
         this.assignmentTitle = assignmentTitle;
         this.description = description;
@@ -81,12 +81,12 @@ public class Assignment {
 		this.assignmentId = assignmentId;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Content getContent() {
+		return content;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setContent(Content content) {
+		this.content = content;
 	}
 
 	public Timestamp getDueDate() {
@@ -151,7 +151,6 @@ public class Assignment {
 
 	public void setAssignScore(Integer assignScore) {
 		this.assignScore = assignScore;
-	}
-
+	}	
 
 }
