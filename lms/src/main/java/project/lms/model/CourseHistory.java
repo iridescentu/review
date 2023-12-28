@@ -1,6 +1,6 @@
 package project.lms.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,12 +14,12 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "course_history")
+@Table(name = "courseHistory")
 public class CourseHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseHistoryId;
+    private Long courseHistoryID;
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)
@@ -29,89 +29,31 @@ public class CourseHistory {
     @JoinColumn(name = "courseId", nullable = false)
     private Course course;
 
-    @Column(nullable = false)
+    @Column(name = "startDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime startDate;
-
-    @ManyToOne
-    @JoinColumn(name = "examId")
-    private Exam exam;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime examDate;
-
-    @Column
-    private Boolean examIsActive;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime examSubmissionTime;
-
-    @Column
-    private Boolean examCompletionStatus;
-
-    @Column
-    private Integer examScore;
-
-    @ManyToOne
-    @JoinColumn(name = "assignmentId")
-    private Assignment assignment;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime dueDate;
-
-    @Column
-    private Boolean assignIsActive;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime assignSubmissionTime;
-
-    @Column
-    private Boolean assignCompletionStatus;
-
-    @Column
-    private Integer assignScore;
+    private Timestamp startDate;
 
     // 기본 생성자
-	public CourseHistory() {
-		super();
-	}
+    public CourseHistory() {
 
-	// 전체 생성자
-	public CourseHistory(Long courseHistoryId, Member member, Course course, LocalDateTime startDate, Exam exam,
-			LocalDateTime examDate, Boolean examIsActive, LocalDateTime examSubmissionTime,
-			Boolean examCompletionStatus, Integer examScore, Assignment assignment, LocalDateTime dueDate,
-			Boolean assignIsActive, LocalDateTime assignSubmissionTime, Boolean assignCompletionStatus,
-			Integer assignScore) {
+    }
+
+    // 전체 생성자
+	public CourseHistory(Long courseHistoryID, Member member, Course course, Timestamp startDate) {
 		super();
-		this.courseHistoryId = courseHistoryId;
+		this.courseHistoryID = courseHistoryID;
 		this.member = member;
 		this.course = course;
 		this.startDate = startDate;
-		this.exam = exam;
-		this.examDate = examDate;
-		this.examIsActive = examIsActive;
-		this.examSubmissionTime = examSubmissionTime;
-		this.examCompletionStatus = examCompletionStatus;
-		this.examScore = examScore;
-		this.assignment = assignment;
-		this.dueDate = dueDate;
-		this.assignIsActive = assignIsActive;
-		this.assignSubmissionTime = assignSubmissionTime;
-		this.assignCompletionStatus = assignCompletionStatus;
-		this.assignScore = assignScore;
 	}
 
-	// Getters and Setters
-	public Long getCourseHistoryId() {
-		return courseHistoryId;
+    // Getters and Setters
+	public Long getCourseHistoryID() {
+		return courseHistoryID;
 	}
 
-	public void setCourseHistoryId(Long courseHistoryId) {
-		this.courseHistoryId = courseHistoryId;
+	public void setCourseHistoryID(Long courseHistoryID) {
+		this.courseHistoryID = courseHistoryID;
 	}
 
 	public Member getMember() {
@@ -130,109 +72,12 @@ public class CourseHistory {
 		this.course = course;
 	}
 
-	public LocalDateTime getStartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
-	public Exam getExam() {
-		return exam;
-	}
-
-	public void setExam(Exam exam) {
-		this.exam = exam;
-	}
-
-	public LocalDateTime getExamDate() {
-		return examDate;
-	}
-
-	public void setExamDate(LocalDateTime examDate) {
-		this.examDate = examDate;
-	}
-
-	public Boolean getExamIsActive() {
-		return examIsActive;
-	}
-
-	public void setExamIsActive(Boolean examIsActive) {
-		this.examIsActive = examIsActive;
-	}
-
-	public LocalDateTime getExamSubmissionTime() {
-		return examSubmissionTime;
-	}
-
-	public void setExamSubmissionTime(LocalDateTime examSubmissionTime) {
-		this.examSubmissionTime = examSubmissionTime;
-	}
-
-	public Boolean getExamCompletionStatus() {
-		return examCompletionStatus;
-	}
-
-	public void setExamCompletionStatus(Boolean examCompletionStatus) {
-		this.examCompletionStatus = examCompletionStatus;
-	}
-
-	public Integer getExamScore() {
-		return examScore;
-	}
-
-	public void setExamScore(Integer examScore) {
-		this.examScore = examScore;
-	}
-
-	public Assignment getAssignment() {
-		return assignment;
-	}
-
-	public void setAssignment(Assignment assignment) {
-		this.assignment = assignment;
-	}
-
-	public LocalDateTime getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(LocalDateTime dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	public Boolean getAssignIsActive() {
-		return assignIsActive;
-	}
-
-	public void setAssignIsActive(Boolean assignIsActive) {
-		this.assignIsActive = assignIsActive;
-	}
-
-	public LocalDateTime getAssignSubmissionTime() {
-		return assignSubmissionTime;
-	}
-
-	public void setAssignSubmissionTime(LocalDateTime assignSubmissionTime) {
-		this.assignSubmissionTime = assignSubmissionTime;
-	}
-
-	public Boolean getAssignCompletionStatus() {
-		return assignCompletionStatus;
-	}
-
-	public void setAssignCompletionStatus(Boolean assignCompletionStatus) {
-		this.assignCompletionStatus = assignCompletionStatus;
-	}
-
-	public Integer getAssignScore() {
-		return assignScore;
-	}
-
-	public void setAssignScore(Integer assignScore) {
-		this.assignScore = assignScore;
-	}
-
-    
 }

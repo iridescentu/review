@@ -16,62 +16,47 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "Exams")
 public class Exam {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long examId;
 
     @ManyToOne
-    @JoinColumn(name = "contentId", nullable = false)
-    private Content content;
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
 
-    @Column(nullable = false)
+    @Column(name = "examDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp examDate;
 
-    @Column(nullable = false)
+    @Column(name = "numQuestions")
     private Integer numQuestions;
 
-    @Column(nullable = false)
+    @Column(name = "durationMins")
     private Integer durationMins;
 
-    @Column(nullable = false)
+    @Column(name = "passingScore")
     private Integer passingScore;
 
     @Column(name = "examIsActive")
-    private Boolean examIsActive;
-
-    @Column(name = "examSubmissionTime")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp examSubmissionTime;
-
-    @Column(name = "examCompletionStatus")
-    private Boolean examCompletionStatus;
-
-    @Column(name = "examScore")
-    private Integer examScore;
+    private boolean examIsActive;
 
     // 기본 생성자
     public Exam() {
-    	
+  
     }
 
     // 전체 생성자
-	public Exam(Long examId, Content content, Timestamp examDate, Integer numQuestions, Integer durationMins,
-			Integer passingScore, Boolean examIsActive, Timestamp examSubmissionTime, Boolean examCompletionStatus,
-			Integer examScore) {
-		super();
-		this.examId = examId;
-		this.content = content;
-		this.examDate = examDate;
-		this.numQuestions = numQuestions;
-		this.durationMins = durationMins;
-		this.passingScore = passingScore;
-		this.examIsActive = examIsActive;
-		this.examSubmissionTime = examSubmissionTime;
-		this.examCompletionStatus = examCompletionStatus;
-		this.examScore = examScore;
-	}
+    public Exam(Long examId, Course course, Timestamp examDate, 
+                 Integer numQuestions, Integer durationMins, Integer passingScore, boolean examIsActive) {
+        this.examId = examId;
+        this.course = course;
+        this.examDate = examDate;
+        this.numQuestions = numQuestions;
+        this.durationMins = durationMins;
+        this.passingScore = passingScore;
+        this.examIsActive = examIsActive;
+    }
 
     // Getters and Setters
 	public Long getExamId() {
@@ -82,12 +67,12 @@ public class Exam {
 		this.examId = examId;
 	}
 
-	public Content getContent() {
-		return content;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setContent(Content content) {
-		this.content = content;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public Timestamp getExamDate() {
@@ -122,37 +107,12 @@ public class Exam {
 		this.passingScore = passingScore;
 	}
 
-	public Boolean getExamIsActive() {
+	public boolean isExamIsActive() {
 		return examIsActive;
 	}
 
-	public void setExamIsActive(Boolean examIsActive) {
+	public void setExamIsActive(boolean examIsActive) {
 		this.examIsActive = examIsActive;
 	}
-
-	public Timestamp getExamSubmissionTime() {
-		return examSubmissionTime;
-	}
-
-	public void setExamSubmissionTime(Timestamp examSubmissionTime) {
-		this.examSubmissionTime = examSubmissionTime;
-	}
-
-	public Boolean getExamCompletionStatus() {
-		return examCompletionStatus;
-	}
-
-	public void setExamCompletionStatus(Boolean examCompletionStatus) {
-		this.examCompletionStatus = examCompletionStatus;
-	}
-
-	public Integer getExamScore() {
-		return examScore;
-	}
-
-	public void setExamScore(Integer examScore) {
-		this.examScore = examScore;
-	}
-	
 
 }

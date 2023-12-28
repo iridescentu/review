@@ -1,7 +1,5 @@
 package project.lms.model;
 
-import java.sql.Timestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,144 +11,106 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "assignments")
 public class Assignment {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assignmentId;
-    
+
     @ManyToOne
-    @JoinColumn(name = "contentId", nullable = false)
-    private Content content;
-    
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp dueDate;
-    
-    @Column(length = 200, nullable = false)
+
+    @Column(name = "assignmentTitle", length = 200, nullable = false)
     private String assignmentTitle;
-    
-    @Column(columnDefinition = "TEXT")
+
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-    
-    @Column(nullable = false)
+
+    @Column(name = "passingScore", nullable = false)
     private Integer passingScore;
-    
-    @Column(name = "assignIsActive")
+
+    @Column(name = "assignIsActive", nullable = false)
     private boolean assignIsActive;
-    
-    @Column(name = "assignSubmissionTime")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp assignSubmissionTime;
-    
-    @Column(name = "assignCompletionStatus")
-    private boolean assignCompletionStatus;
-    
-    @Column(name = "assignScore")
-    private Integer assignScore;
 
     // 기본 생성자
     public Assignment() {
-  
     }
 
     // 전체 생성자
-    public Assignment(Long assignmentId, Content content, Timestamp dueDate, String assignmentTitle, String description, 
-                      Integer passingScore, boolean assignIsActive, Timestamp assignSubmissionTime, 
-                      boolean assignCompletionStatus, Integer assignScore) {
+    public Assignment(Long assignmentId, Course course, Timestamp dueDate, String assignmentTitle,
+                      String description, Integer passingScore, boolean assignIsActive) {
         this.assignmentId = assignmentId;
-        this.content = content;
+        this.course = course;
         this.dueDate = dueDate;
         this.assignmentTitle = assignmentTitle;
         this.description = description;
         this.passingScore = passingScore;
         this.assignIsActive = assignIsActive;
-        this.assignSubmissionTime = assignSubmissionTime;
-        this.assignCompletionStatus = assignCompletionStatus;
-        this.assignScore = assignScore;
     }
 
     // Getters and Setters
-	public Long getAssignmentId() {
-		return assignmentId;
-	}
+    public Long getAssignmentId() {
+        return assignmentId;
+    }
 
-	public void setAssignmentId(Long assignmentId) {
-		this.assignmentId = assignmentId;
-	}
+    public void setAssignmentId(Long assignmentId) {
+        this.assignmentId = assignmentId;
+    }
 
-	public Content getContent() {
-		return content;
-	}
+    public Course getCourse() {
+        return course;
+    }
 
-	public void setContent(Content content) {
-		this.content = content;
-	}
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
-	public Timestamp getDueDate() {
-		return dueDate;
-	}
+    public Timestamp getDueDate() {
+        return dueDate;
+    }
 
-	public void setDueDate(Timestamp dueDate) {
-		this.dueDate = dueDate;
-	}
+    public void setDueDate(Timestamp dueDate) {
+        this.dueDate = dueDate;
+    }
 
-	public String getAssignmentTitle() {
-		return assignmentTitle;
-	}
+    public String getAssignmentTitle() {
+        return assignmentTitle;
+    }
 
-	public void setAssignmentTitle(String assignmentTitle) {
-		this.assignmentTitle = assignmentTitle;
-	}
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getPassingScore() {
-		return passingScore;
-	}
+    public Integer getPassingScore() {
+        return passingScore;
+    }
 
-	public void setPassingScore(Integer passingScore) {
-		this.passingScore = passingScore;
-	}
+    public void setPassingScore(Integer passingScore) {
+        this.passingScore = passingScore;
+    }
 
-	public boolean isAssignIsActive() {
-		return assignIsActive;
-	}
+    public boolean isAssignIsActive() {
+        return assignIsActive;
+    }
 
-	public void setAssignIsActive(boolean assignIsActive) {
-		this.assignIsActive = assignIsActive;
-	}
-
-	public Timestamp getAssignSubmissionTime() {
-		return assignSubmissionTime;
-	}
-
-	public void setAssignSubmissionTime(Timestamp assignSubmissionTime) {
-		this.assignSubmissionTime = assignSubmissionTime;
-	}
-
-	public boolean isAssignCompletionStatus() {
-		return assignCompletionStatus;
-	}
-
-	public void setAssignCompletionStatus(boolean assignCompletionStatus) {
-		this.assignCompletionStatus = assignCompletionStatus;
-	}
-
-	public Integer getAssignScore() {
-		return assignScore;
-	}
-
-	public void setAssignScore(Integer assignScore) {
-		this.assignScore = assignScore;
-	}	
-
+    public void setAssignIsActive(boolean assignIsActive) {
+        this.assignIsActive = assignIsActive;
+    }
 }
