@@ -1,6 +1,7 @@
 package project.lms.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,12 +23,12 @@ public class Exam {
     private Long examId;
 
     @ManyToOne
-    @JoinColumn(name = "courseId", nullable = false)
-    private Course course;
+    @JoinColumn(name = "contentId", nullable = false)
+    private Content content;
 
     @Column(name = "examDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp examDate;
+    private LocalDateTime examDate;
 
     @Column(name = "numQuestions")
     private Integer numQuestions;
@@ -47,10 +48,10 @@ public class Exam {
     }
 
     // 전체 생성자
-    public Exam(Long examId, Course course, Timestamp examDate, 
+    public Exam(Long examId, Content content, LocalDateTime examDate, 
                  Integer numQuestions, Integer durationMins, Integer passingScore, boolean examIsActive) {
         this.examId = examId;
-        this.course = course;
+        this.content = content;
         this.examDate = examDate;
         this.numQuestions = numQuestions;
         this.durationMins = durationMins;
@@ -67,19 +68,19 @@ public class Exam {
 		this.examId = examId;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Content getContent() {
+		return content;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setContent(Content content) {
+		this.content = content;
 	}
 
-	public Timestamp getExamDate() {
+	public LocalDateTime getExamDate() {
 		return examDate;
 	}
 
-	public void setExamDate(Timestamp examDate) {
+	public void setExamDate(LocalDateTime examDate) {
 		this.examDate = examDate;
 	}
 

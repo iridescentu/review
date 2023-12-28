@@ -1,6 +1,7 @@
 package project.lms.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +32,7 @@ public class AssignmentHistory {
 
     @Column(name = "submissionTime")
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp submissionTime;
+    private LocalDateTime submissionTime;
 
     @Column(name = "examCompletionStatus")
     private boolean examCompletionStatus;
@@ -46,7 +47,7 @@ public class AssignmentHistory {
 
     // 전체 생성자
     public AssignmentHistory(Long assignmentHistoryId, Member member, Assignment assignment, 
-                             Timestamp submissionTime, boolean examCompletionStatus, Integer score) {
+    		LocalDateTime submissionTime, boolean examCompletionStatus, Integer score) {
         this.assignmentHistoryId = assignmentHistoryId;
         this.member = member;
         this.assignment = assignment;
@@ -80,11 +81,11 @@ public class AssignmentHistory {
 		this.assignment = assignment;
 	}
 
-	public Timestamp getSubmissionTime() {
+	public LocalDateTime getSubmissionTime() {
 		return submissionTime;
 	}
 
-	public void setSubmissionTime(Timestamp submissionTime) {
+	public void setSubmissionTime(LocalDateTime submissionTime) {
 		this.submissionTime = submissionTime;
 	}
 

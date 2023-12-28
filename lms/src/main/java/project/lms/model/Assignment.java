@@ -12,6 +12,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "assignments")
@@ -22,12 +23,12 @@ public class Assignment {
     private Long assignmentId;
 
     @ManyToOne
-    @JoinColumn(name = "courseId", nullable = false)
-    private Course course;
+    @JoinColumn(name = "contentId", nullable = false)
+    private Content content;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp dueDate;
+    private LocalDateTime dueDate;
 
     @Column(name = "assignmentTitle", length = 200, nullable = false)
     private String assignmentTitle;
@@ -46,10 +47,10 @@ public class Assignment {
     }
 
     // 전체 생성자
-    public Assignment(Long assignmentId, Course course, Timestamp dueDate, String assignmentTitle,
+    public Assignment(Long assignmentId, Content content, LocalDateTime dueDate, String assignmentTitle,
                       String description, Integer passingScore, boolean assignIsActive) {
         this.assignmentId = assignmentId;
-        this.course = course;
+        this.content = content;
         this.dueDate = dueDate;
         this.assignmentTitle = assignmentTitle;
         this.description = description;
@@ -58,59 +59,60 @@ public class Assignment {
     }
 
     // Getters and Setters
-    public Long getAssignmentId() {
-        return assignmentId;
-    }
+	public Long getAssignmentId() {
+		return assignmentId;
+	}
 
-    public void setAssignmentId(Long assignmentId) {
-        this.assignmentId = assignmentId;
-    }
+	public void setAssignmentId(Long assignmentId) {
+		this.assignmentId = assignmentId;
+	}
 
-    public Course getCourse() {
-        return course;
-    }
+	public Content getContent() {
+		return content;
+	}
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+	public void setContent(Content content) {
+		this.content = content;
+	}
 
-    public Timestamp getDueDate() {
-        return dueDate;
-    }
+	public LocalDateTime getDueDate() {
+		return dueDate;
+	}
 
-    public void setDueDate(Timestamp dueDate) {
-        this.dueDate = dueDate;
-    }
+	public void setDueDate(LocalDateTime dueDate) {
+		this.dueDate = dueDate;
+	}
 
-    public String getAssignmentTitle() {
-        return assignmentTitle;
-    }
+	public String getAssignmentTitle() {
+		return assignmentTitle;
+	}
 
-    public void setAssignmentTitle(String assignmentTitle) {
-        this.assignmentTitle = assignmentTitle;
-    }
+	public void setAssignmentTitle(String assignmentTitle) {
+		this.assignmentTitle = assignmentTitle;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Integer getPassingScore() {
-        return passingScore;
-    }
+	public Integer getPassingScore() {
+		return passingScore;
+	}
 
-    public void setPassingScore(Integer passingScore) {
-        this.passingScore = passingScore;
-    }
+	public void setPassingScore(Integer passingScore) {
+		this.passingScore = passingScore;
+	}
 
-    public boolean isAssignIsActive() {
-        return assignIsActive;
-    }
+	public boolean isAssignIsActive() {
+		return assignIsActive;
+	}
 
-    public void setAssignIsActive(boolean assignIsActive) {
-        this.assignIsActive = assignIsActive;
-    }
+	public void setAssignIsActive(boolean assignIsActive) {
+		this.assignIsActive = assignIsActive;
+	}
+   
 }

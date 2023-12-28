@@ -28,19 +28,15 @@ public class Course {
     @Column(nullable = true, length = 500) // 강의 소개는 필수가 아닐 수 있음
     private String description;
 
-    @ManyToOne // ManyToOne 관계 설정: 하나의 강의는 여러 강사 ID를 가질 수 있음
-    @JoinColumn(name = "instructorId", nullable = false)
-    private Instructor instructor;
-
     @Column(nullable = false)
     private Integer durationMins;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private LocalDateTime startDate;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private LocalDateTime endDate;
 
     // 기본 생성자
@@ -49,13 +45,12 @@ public class Course {
     }
 
     // 전체 생성자
-	public Course(Long courseId, String courseName, String description, Instructor instructor,
+	public Course(Long courseId, String courseName, String description, 
 			Integer durationMins, LocalDateTime startDate, LocalDateTime endDate) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.description = description;
-		this.instructor = instructor;
 		this.durationMins = durationMins;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -84,14 +79,6 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Instructor getInstructor() {
-		return instructor;
-	}
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
 	}
 
 	public Integer getDurationMins() {
