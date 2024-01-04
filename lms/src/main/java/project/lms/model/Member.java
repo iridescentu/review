@@ -43,9 +43,6 @@ public class Member {
 	
 	private String phoneNum;
 	
-	private String emergencyNum;
-	
-	private String photo;
 	
 	private Timestamp joinDate;
 	
@@ -56,8 +53,8 @@ public class Member {
 	}
 
 	public Member(Long memberId, String loginId, String roleId, String password, String name, LocalDate birthDate,
-			Gender gender, Nationality nationality, String email, String phoneNum, String emergencyNum, String photo,
-			Timestamp joinDate, boolean isActive) {
+			Gender gender, Nationality nationality, String email, String phoneNum, Timestamp joinDate,
+			boolean isActive) {
 		super();
 		this.memberId = memberId;
 		this.loginId = loginId;
@@ -69,8 +66,6 @@ public class Member {
 		this.nationality = nationality;
 		this.email = email;
 		this.phoneNum = phoneNum;
-		this.emergencyNum = emergencyNum;
-		this.photo = photo;
 		this.joinDate = joinDate;
 		this.isActive = isActive;
 	}
@@ -155,22 +150,6 @@ public class Member {
 		this.phoneNum = phoneNum;
 	}
 
-	public String getEmergencyNum() {
-		return emergencyNum;
-	}
-
-	public void setEmergencyNum(String emergencyNum) {
-		this.emergencyNum = emergencyNum;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 	public Timestamp getJoinDate() {
 		return joinDate;
 	}
@@ -186,5 +165,5 @@ public class Member {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-}
 
+}

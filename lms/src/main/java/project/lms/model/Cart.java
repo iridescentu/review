@@ -31,23 +31,33 @@ public class Cart {
 	private Course course;
 	
 	@Column(nullable = false)
-	private Integer quanity;
-	
-	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createDate;
+	
+	@Column(name = "totalQuantity", nullable = false)
+	private Integer totalQuantity;
+	
+	@ManyToOne
+    @JoinColumn(name = "price", referencedColumnName = "price", nullable = false)
+    private Course price;
+
+    @Column(name = "totalPrice", nullable = false)
+    private Integer totalPrice;
 
 	public Cart() {
 		super();
 	}
 
-	public Cart(Long cartId, Member member, Course course, Integer quanity, LocalDateTime createDate) {
+	public Cart(Long cartId, Member member, Course course, LocalDateTime createDate, Integer totalQuantity,
+			Course price, Integer totalPrice) {
 		super();
 		this.cartId = cartId;
 		this.member = member;
 		this.course = course;
-		this.quanity = quanity;
 		this.createDate = createDate;
+		this.totalQuantity = totalQuantity;
+		this.price = price;
+		this.totalPrice = totalPrice;
 	}
 
 	public Long getCartId() {
@@ -74,14 +84,6 @@ public class Cart {
 		this.course = course;
 	}
 
-	public Integer getQuanity() {
-		return quanity;
-	}
-
-	public void setQuanity(Integer quanity) {
-		this.quanity = quanity;
-	}
-
 	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
@@ -89,6 +91,29 @@ public class Cart {
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
-	
+
+	public Integer getTotalQuantity() {
+		return totalQuantity;
+	}
+
+	public void setTotalQuantity(Integer totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+
+	public Course getPrice() {
+		return price;
+	}
+
+	public void setPrice(Course price) {
+		this.price = price;
+	}
+
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	
 }

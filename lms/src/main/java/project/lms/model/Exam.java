@@ -15,7 +15,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "Exams")
+@Table(name = "exams")
 public class Exam {
     
     @Id
@@ -23,8 +23,8 @@ public class Exam {
     private Long examId;
 
     @ManyToOne
-    @JoinColumn(name = "contentId", nullable = false)
-    private Content content;
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
 
     @Column(name = "examDate")
     @Temporal(TemporalType.TIMESTAMP)
@@ -48,10 +48,10 @@ public class Exam {
     }
 
     // 전체 생성자
-    public Exam(Long examId, Content content, LocalDateTime examDate, 
+    public Exam(Long examId, Course course, LocalDateTime examDate, 
                  Integer numQuestions, Integer durationMins, Integer passingScore, boolean examIsActive) {
         this.examId = examId;
-        this.content = content;
+        this.course = course;
         this.examDate = examDate;
         this.numQuestions = numQuestions;
         this.durationMins = durationMins;
@@ -68,12 +68,12 @@ public class Exam {
 		this.examId = examId;
 	}
 
-	public Content getContent() {
-		return content;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setContent(Content content) {
-		this.content = content;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public LocalDateTime getExamDate() {

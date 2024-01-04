@@ -21,12 +21,21 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
+    @ManyToOne
+    @JoinColumn(name = "subjectId", nullable = false)
+    private Subject subject;
 
     @Column(nullable = false, length = 150)
     private String courseName;
 
     @Column(nullable = true, length = 500) // 강의 소개는 필수가 아닐 수 있음
     private String description;
+    
+    @Column(name = "courseThumbnail")
+    private byte[] courseThumbnail;
+    
+    @Column(name = "contentLevel")
+    private String contentLevel;
 
     @Column(nullable = false)
     private Integer durationMins;
@@ -38,6 +47,9 @@ public class Course {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private LocalDateTime endDate;
+    
+    @Column(name = "price", nullable = false)
+    private Integer price;
 
     // 기본 생성자
     public Course() {
@@ -45,15 +57,19 @@ public class Course {
     }
 
     // 전체 생성자
-	public Course(Long courseId, String courseName, String description, 
-			Integer durationMins, LocalDateTime startDate, LocalDateTime endDate) {
+	public Course(Long courseId, Subject subject, String courseName, String description, byte[] courseThumbnail,
+			String contentLevel, Integer durationMins, LocalDateTime startDate, LocalDateTime endDate, Integer price) {
 		super();
 		this.courseId = courseId;
+		this.subject = subject;
 		this.courseName = courseName;
 		this.description = description;
+		this.courseThumbnail = courseThumbnail;
+		this.contentLevel = contentLevel;
 		this.durationMins = durationMins;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.price = price;
 	}
 
     // Getters and Setters
@@ -63,6 +79,14 @@ public class Course {
 
 	public void setCourseId(Long courseId) {
 		this.courseId = courseId;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	public String getCourseName() {
@@ -79,6 +103,22 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public byte[] getCourseThumbnail() {
+		return courseThumbnail;
+	}
+
+	public void setCourseThumbnail(byte[] courseThumbnail) {
+		this.courseThumbnail = courseThumbnail;
+	}
+
+	public String getContentLevel() {
+		return contentLevel;
+	}
+
+	public void setContentLevel(String contentLevel) {
+		this.contentLevel = contentLevel;
 	}
 
 	public Integer getDurationMins() {
@@ -103,6 +143,14 @@ public class Course {
 
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 }

@@ -11,31 +11,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.lms.model.Member;
-import project.lms.service.MemberService;
+import project.lms.model.CourseHistory;
+import project.lms.service.CourseHistoryService;
 
 @RestController
 @RequestMapping("/test")
 @CrossOrigin(origins="http://localhost:3000",
 methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
-public class MemberController {
+public class CourseHistoryController {
 
-	private final MemberService memberService;
-	
+	private final CourseHistoryService courseHistoryService;
+
 	@Autowired
-	public MemberController(MemberService memberService) {
-		this.memberService = memberService;
+	public CourseHistoryController(CourseHistoryService courseHistoryService) {
+		super();
+		this.courseHistoryService = courseHistoryService;
 	}
 	
-	@GetMapping("/member")
-	public List<Member> getAllMembers(){
-		return memberService.getAllMembers();
+	@GetMapping("/coursehistory")
+	public List<CourseHistory> getAllCourseHistories(){
+		return courseHistoryService.getAllCourseHistories();
 	}
 	
-	@PostMapping("/member")
-	public Member createMember(@RequestBody Member member) {
-		return memberService.createMember(member);
+	@PostMapping("/coursehistory")
+	public CourseHistory createCourseHistory(@RequestBody CourseHistory courseHistory) {
+		return courseHistoryService.createCourseHistory(courseHistory);
 	}
-	
-	
 }

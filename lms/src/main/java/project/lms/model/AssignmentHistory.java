@@ -1,6 +1,5 @@
 package project.lms.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -15,7 +14,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "AssignmentHistory")
+@Table(name = "assignmentHistory")
 public class AssignmentHistory {
     
     @Id
@@ -34,8 +33,8 @@ public class AssignmentHistory {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime submissionTime;
 
-    @Column(name = "examCompletionStatus")
-    private boolean examCompletionStatus;
+    @Column(name = "assignCompletionStatus")
+    private boolean assignCompletionStatus;
 
     @Column(name = "score")
     private Integer score;
@@ -47,12 +46,12 @@ public class AssignmentHistory {
 
     // 전체 생성자
     public AssignmentHistory(Long assignmentHistoryId, Member member, Assignment assignment, 
-    		LocalDateTime submissionTime, boolean examCompletionStatus, Integer score) {
+    		LocalDateTime submissionTime, boolean assignCompletionStatus, Integer score) {
         this.assignmentHistoryId = assignmentHistoryId;
         this.member = member;
         this.assignment = assignment;
         this.submissionTime = submissionTime;
-        this.examCompletionStatus = examCompletionStatus;
+        this.assignCompletionStatus = assignCompletionStatus;
         this.score = score;
     }
 
@@ -89,12 +88,12 @@ public class AssignmentHistory {
 		this.submissionTime = submissionTime;
 	}
 
-	public boolean isExamCompletionStatus() {
-		return examCompletionStatus;
+	public boolean isAssignCompletionStatus() {
+		return assignCompletionStatus;
 	}
 
-	public void setExamCompletionStatus(boolean examCompletionStatus) {
-		this.examCompletionStatus = examCompletionStatus;
+	public void setAssignCompletionStatus(boolean assignCompletionStatus) {
+		this.assignCompletionStatus = assignCompletionStatus;
 	}
 
 	public Integer getScore() {

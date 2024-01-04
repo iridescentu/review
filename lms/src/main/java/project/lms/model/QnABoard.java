@@ -12,12 +12,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "qna_board")
+@Table(name = "qnaBoard")
 public class QnABoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    private Long qnaId;
     
     @ManyToOne
     @JoinColumn(name = "courseId", nullable = false)
@@ -45,10 +45,10 @@ public class QnABoard {
     }
 
     // 전체 생성자
-    public QnABoard(Long postId, Course course, Member member, String title, String description, String content,
+    public QnABoard(Long qnaId, Course course, Member member, String title, String description, String content,
 			Timestamp createdAt) {
 		super();
-		this.postId = postId;
+		this.qnaId = qnaId;
 		this.course = course;
 		this.member = member;
 		this.title = title;
@@ -58,12 +58,12 @@ public class QnABoard {
 	}
     
     // Getter and Setter methods
-    public Long getPostId() {
-        return postId;
+    public Long getQnaId() {
+        return qnaId;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setQnaId(Long qnaId) {
+        this.qnaId = qnaId;
     }
 
     public Course getCourse() {
