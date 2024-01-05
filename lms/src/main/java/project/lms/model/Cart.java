@@ -36,10 +36,6 @@ public class Cart {
 	
 	@Column(name = "totalQuantity", nullable = false)
 	private Integer totalQuantity;
-	
-	@ManyToOne
-    @JoinColumn(name = "price", referencedColumnName = "price", nullable = false)
-    private Course price;
 
     @Column(name = "totalPrice", nullable = false)
     private Integer totalPrice;
@@ -48,15 +44,13 @@ public class Cart {
 		super();
 	}
 
-	public Cart(Long cartId, Member member, Course course, LocalDateTime createDate, Integer totalQuantity,
-			Course price, Integer totalPrice) {
+	public Cart(Long cartId, Member member, Course course, LocalDateTime createDate, Integer totalQuantity, Integer totalPrice) {
 		super();
 		this.cartId = cartId;
 		this.member = member;
 		this.course = course;
 		this.createDate = createDate;
 		this.totalQuantity = totalQuantity;
-		this.price = price;
 		this.totalPrice = totalPrice;
 	}
 
@@ -98,14 +92,6 @@ public class Cart {
 
 	public void setTotalQuantity(Integer totalQuantity) {
 		this.totalQuantity = totalQuantity;
-	}
-
-	public Course getPrice() {
-		return price;
-	}
-
-	public void setPrice(Course price) {
-		this.price = price;
 	}
 
 	public Integer getTotalPrice() {
