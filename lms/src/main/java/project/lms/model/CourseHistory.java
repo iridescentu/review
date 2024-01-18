@@ -1,5 +1,6 @@
 package project.lms.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -31,15 +32,14 @@ public class CourseHistory {
 
     @Column(name = "startDate")
     @Temporal(TemporalType.DATE)
-    private LocalDate startDate;
+    private Date startDate;
 
     // 기본 생성자
     public CourseHistory() {
 
     }
 
-    // 전체 생성자
-	public CourseHistory(Long courseHistoryID, Member member, Course course, LocalDate startDate) {
+	public CourseHistory(Long courseHistoryID, Member member, Course course, Date startDate) {
 		super();
 		this.courseHistoryID = courseHistoryID;
 		this.member = member;
@@ -47,7 +47,6 @@ public class CourseHistory {
 		this.startDate = startDate;
 	}
 
-    // Getters and Setters
 	public Long getCourseHistoryID() {
 		return courseHistoryID;
 	}
@@ -72,12 +71,13 @@ public class CourseHistory {
 		this.course = course;
 	}
 
-	public LocalDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
+    
 }

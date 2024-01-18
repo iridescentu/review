@@ -24,4 +24,8 @@ public class CourseService {
 	public Course createCourse(Course course) {
 		return courseRepository.save(course);
 	}
+	
+	public Course getCourseById(Long courseId) {
+        return courseRepository.findById(courseId).orElse(null);
+    }
 }

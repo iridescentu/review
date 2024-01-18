@@ -39,14 +39,6 @@ public class Course {
 
     @Column(nullable = false)
     private Integer durationMins;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private LocalDateTime startDate;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private LocalDateTime endDate;
     
     @Column(name = "price", nullable = false)
     private Integer price;
@@ -56,9 +48,8 @@ public class Course {
         super();
     }
 
-    // 전체 생성자
 	public Course(Long courseId, Subject subject, String courseName, String description, byte[] courseThumbnail,
-			String contentLevel, Integer durationMins, LocalDateTime startDate, LocalDateTime endDate, Integer price) {
+			String contentLevel, Integer durationMins, Integer price) {
 		super();
 		this.courseId = courseId;
 		this.subject = subject;
@@ -67,12 +58,9 @@ public class Course {
 		this.courseThumbnail = courseThumbnail;
 		this.contentLevel = contentLevel;
 		this.durationMins = durationMins;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.price = price;
 	}
 
-    // Getters and Setters
 	public Long getCourseId() {
 		return courseId;
 	}
@@ -129,22 +117,6 @@ public class Course {
 		this.durationMins = durationMins;
 	}
 
-	public LocalDateTime getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDateTime startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDateTime getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDateTime endDate) {
-		this.endDate = endDate;
-	}
-
 	public Integer getPrice() {
 		return price;
 	}
@@ -153,4 +125,5 @@ public class Course {
 		this.price = price;
 	}
 
+   
 }

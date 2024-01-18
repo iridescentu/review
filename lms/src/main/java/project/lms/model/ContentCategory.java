@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ContentCategories", uniqueConstraints = {
+@Table(name = "contentCategories", uniqueConstraints = {
     @UniqueConstraint(columnNames = "categoryName") // categoryName에 대한 유니크 제약 조건 추가
 })
 public class ContentCategory {

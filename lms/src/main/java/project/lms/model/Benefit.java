@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import project.lms.enumstatus.BenefitType;
+import project.lms.enumstatus.Completion;
 
 @Entity
 @Table(name = "benefits")
@@ -36,7 +34,7 @@ public class Benefit {
 //    @Column(name = "type", nullable = false)
 //    private BenefitType type;
 	
-	private BenefitType benefitType;
+	private Completion completion;
 
     @Column(name = "requiredCompletionCount")
     private Integer requiredCompletionCount;
@@ -61,13 +59,13 @@ public class Benefit {
 		super();
 	}
 
-	public Benefit(Long benefitId, Course course, String description, BenefitType benefitType,
+	public Benefit(Long benefitId, Course course, String description, Completion completion,
 			Integer requiredCompletionCount, String couponCode, LocalDateTime expirationDate, Boolean isActive) {
 		super();
 		this.benefitId = benefitId;
 		this.course = course;
 		this.description = description;
-		this.benefitType = benefitType;
+		this.completion = completion;
 		this.requiredCompletionCount = requiredCompletionCount;
 		this.couponCode = couponCode;
 		this.expirationDate = expirationDate;
@@ -98,12 +96,12 @@ public class Benefit {
 		this.description = description;
 	}
 
-	public BenefitType getBenefitType() {
-		return benefitType;
+	public Completion getCompletion() {
+		return completion;
 	}
 
-	public void setBenefitType(BenefitType benefitType) {
-		this.benefitType = benefitType;
+	public void setCompletion(Completion completion) {
+		this.completion = completion;
 	}
 
 	public Integer getRequiredCompletionCount() {

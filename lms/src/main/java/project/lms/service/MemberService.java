@@ -1,26 +1,13 @@
 package project.lms.service;
 
-import java.util.List;
+import project.lms.dto.ResponseDto;
+import project.lms.dto.MemberDto;
+import project.lms.dto.MemberLoginDto;
 
-import org.springframework.stereotype.Service;
-
-import project.lms.model.Member;
-import project.lms.repository.MemberRepository;
-
-@Service
-public class MemberService {
-
-	private final MemberRepository memberRepository;
+public interface MemberService {
 	
-	public MemberService(MemberRepository memberRepository) {
-		this.memberRepository = memberRepository;
-	}
-	
-	public List<Member> getAllMembers() {
-		return memberRepository.findAll();
-	}
-	
-	public Member createMember(Member member) {
-		return memberRepository.save(member);
-	}
+	public ResponseDto<MemberDto> signUp(MemberDto memberDto);
+	public ResponseDto<MemberLoginDto> login(MemberLoginDto memberLoginDto);
+	public MemberDto getMemberWithAuthorities(String loginId);
+	public MemberDto getCurrentMemberWithAuthorities();
 }

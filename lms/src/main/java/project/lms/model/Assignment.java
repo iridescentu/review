@@ -23,42 +23,44 @@ public class Assignment {
     private Long assignmentId;
 
     @ManyToOne
-    @JoinColumn(name = "contentId", nullable = false)
+    @JoinColumn(name = "contentId")
     private Content content;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dueDate;
 
-    @Column(name = "assignmentTitle", length = 200, nullable = false)
+    @Column(length = 200, nullable = false)
     private String assignmentTitle;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "passingScore", nullable = false)
+    @Column(nullable = false)
     private Integer passingScore;
 
-    @Column(name = "assignIsActive", nullable = false)
+    @Column
     private boolean assignIsActive;
+    
+    private String correctAnswer;
 
     // 기본 생성자
     public Assignment() {
     }
 
-    // 전체 생성자
-    public Assignment(Long assignmentId, Content content, LocalDateTime dueDate, String assignmentTitle,
-                      String description, Integer passingScore, boolean assignIsActive) {
-        this.assignmentId = assignmentId;
-        this.content = content;
-        this.dueDate = dueDate;
-        this.assignmentTitle = assignmentTitle;
-        this.description = description;
-        this.passingScore = passingScore;
-        this.assignIsActive = assignIsActive;
-    }
+	public Assignment(Long assignmentId, Content content, LocalDateTime dueDate, String assignmentTitle,
+			String description, Integer passingScore, boolean assignIsActive, String correctAnswer) {
+		super();
+		this.assignmentId = assignmentId;
+		this.content = content;
+		this.dueDate = dueDate;
+		this.assignmentTitle = assignmentTitle;
+		this.description = description;
+		this.passingScore = passingScore;
+		this.assignIsActive = assignIsActive;
+		this.correctAnswer = correctAnswer;
+	}
 
-    // Getters and Setters
 	public Long getAssignmentId() {
 		return assignmentId;
 	}
@@ -114,5 +116,13 @@ public class Assignment {
 	public void setAssignIsActive(boolean assignIsActive) {
 		this.assignIsActive = assignIsActive;
 	}
-   
+
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
+
 }

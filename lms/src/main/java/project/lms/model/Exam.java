@@ -30,36 +30,34 @@ public class Exam {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime examDate;
 
-    @Column(name = "numQuestions")
     private Integer numQuestions;
 
-    @Column(name = "durationMins")
     private Integer durationMins;
 
-    @Column(name = "passingScore")
     private Integer passingScore;
 
-    @Column(name = "examIsActive")
     private boolean examIsActive;
+    
+    private String correctAnswer;
 
     // 기본 생성자
     public Exam() {
   
     }
 
-    // 전체 생성자
-    public Exam(Long examId, Course course, LocalDateTime examDate, 
-                 Integer numQuestions, Integer durationMins, Integer passingScore, boolean examIsActive) {
-        this.examId = examId;
-        this.course = course;
-        this.examDate = examDate;
-        this.numQuestions = numQuestions;
-        this.durationMins = durationMins;
-        this.passingScore = passingScore;
-        this.examIsActive = examIsActive;
-    }
+	public Exam(Long examId, Course course, LocalDateTime examDate, Integer numQuestions, Integer durationMins,
+			Integer passingScore, boolean examIsActive, String correctAnswer) {
+		super();
+		this.examId = examId;
+		this.course = course;
+		this.examDate = examDate;
+		this.numQuestions = numQuestions;
+		this.durationMins = durationMins;
+		this.passingScore = passingScore;
+		this.examIsActive = examIsActive;
+		this.correctAnswer = correctAnswer;
+	}
 
-    // Getters and Setters
 	public Long getExamId() {
 		return examId;
 	}
@@ -116,4 +114,13 @@ public class Exam {
 		this.examIsActive = examIsActive;
 	}
 
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
+
+   
 }
