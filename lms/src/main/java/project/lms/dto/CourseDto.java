@@ -1,33 +1,45 @@
 package project.lms.dto;
 
-import project.lms.model.Course;
+import org.springframework.web.multipart.MultipartFile;
+
+import project.lms.model.Subject;
 
 public class CourseDto {
 
 	private Long courseId;
-    private Long subjectId;
-    private String courseName;
-    private String description;
-    private byte[] courseThumbnail;
-    private String contentLevel;
-    private Integer durationMins;
-    private Integer price;
+	
+    private Subject subject;
+
+	private String courseName;
+
+	private String description;
     
+	private Integer durationMins;
+
+	private MultipartFile courseThumbnail;
+
+	private String contentLevel;
+
+    private Integer price;
+
+    private String announcement;
+
 	public CourseDto() {
 		super();
 	}
 
-	public CourseDto(Long courseId, Long subjectId, String courseName, String description, byte[] courseThumbnail,
-			String contentLevel, Integer durationMins, Integer price) {
+	public CourseDto(Long courseId, Subject subject, String courseName, String description, Integer durationMins,
+			MultipartFile courseThumbnail, String contentLevel, Integer price, String announcement) {
 		super();
 		this.courseId = courseId;
-		this.subjectId = subjectId;
+		this.subject = subject;
 		this.courseName = courseName;
 		this.description = description;
+		this.durationMins = durationMins;
 		this.courseThumbnail = courseThumbnail;
 		this.contentLevel = contentLevel;
-		this.durationMins = durationMins;
 		this.price = price;
+		this.announcement = announcement;
 	}
 
 	public Long getCourseId() {
@@ -38,12 +50,12 @@ public class CourseDto {
 		this.courseId = courseId;
 	}
 
-	public Long getSubjectId() {
-		return subjectId;
+	public Subject getSubject() {
+		return subject;
 	}
 
-	public void setSubjectId(Long subjectId) {
-		this.subjectId = subjectId;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	public String getCourseName() {
@@ -62,11 +74,19 @@ public class CourseDto {
 		this.description = description;
 	}
 
-	public byte[] getCourseThumbnail() {
+	public Integer getDurationMins() {
+		return durationMins;
+	}
+
+	public void setDurationMins(Integer durationMins) {
+		this.durationMins = durationMins;
+	}
+
+	public MultipartFile getCourseThumbnail() {
 		return courseThumbnail;
 	}
 
-	public void setCourseThumbnail(byte[] courseThumbnail) {
+	public void setCourseThumbnail(MultipartFile courseThumbnail) {
 		this.courseThumbnail = courseThumbnail;
 	}
 
@@ -78,14 +98,6 @@ public class CourseDto {
 		this.contentLevel = contentLevel;
 	}
 
-	public Integer getDurationMins() {
-		return durationMins;
-	}
-
-	public void setDurationMins(Integer durationMins) {
-		this.durationMins = durationMins;
-	}
-
 	public Integer getPrice() {
 		return price;
 	}
@@ -93,18 +105,13 @@ public class CourseDto {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
-	public static CourseDto fromEntity(Course course) {
-        CourseDto courseDto = new CourseDto();
-        courseDto.setCourseId(course.getCourseId());
-        courseDto.setSubjectId(course.getSubject().getSubjectId());
-        courseDto.setCourseName(course.getCourseName());
-        courseDto.setDescription(course.getDescription());
-        courseDto.setCourseThumbnail(course.getCourseThumbnail());
-        courseDto.setContentLevel(course.getContentLevel());
-        courseDto.setDurationMins(course.getDurationMins());
-        courseDto.setPrice(course.getPrice());
-        return courseDto;
-    }
+
+	public String getAnnouncement() {
+		return announcement;
+	}
+
+	public void setAnnouncement(String announcement) {
+		this.announcement = announcement;
+	}
     
 }

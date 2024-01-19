@@ -1,6 +1,7 @@
 package project.lms.repository;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,12 @@ import project.lms.model.Content;
 
 // JpaRepository를 상속받아야 하며, 제네릭 타입은 <엔터티, 기본키의 타입>이다.
 public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
+
+    // 예시: AssignmentTitle에 특정 키워드가 포함된 Assignment 리스트를 가져오는 메서드
+    List<Assignment> findByAssignmentTitleContaining(String keyword);
+    
+    // 예시: DueDate가 현재 날짜 이후인 Assignment 리스트를 가져오는 메서드
+    List<Assignment> findByDueDateAfter(LocalDateTime currentDate);
 
 //    // 특정 제목의 과제 검색
 //    Assignment findByAssignmentTitle(String assignmentTitle);

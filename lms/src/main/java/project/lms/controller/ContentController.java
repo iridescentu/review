@@ -14,7 +14,7 @@ import project.lms.model.Content;
 import project.lms.service.ContentService;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api")
 @CrossOrigin(origins="http://localhost:3000",
 methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 public class ContentController {
