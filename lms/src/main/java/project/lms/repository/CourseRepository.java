@@ -19,5 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 	
 	// 코스 설명에 포함된 단어로 찾기
 	List<Course> findByDescriptionContaining(String keyword);
+
+	List<Course> findBySubject_SubjectId(Long subjectId);
 	
 }

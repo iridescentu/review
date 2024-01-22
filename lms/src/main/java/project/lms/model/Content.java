@@ -27,23 +27,14 @@ public class Content {
     @Column(name = "contentDescription", columnDefinition = "TEXT")
     private String contentDescription;
 
-    @Column(name = "contentType", length = 50, nullable = false)
-    private String contentType;
-
-    @Column
-    private String contentData;
-
-    @Column(name = "contentURL")
-    private String contentURL;
+    @Column(name = "contentImg")
+    private String contentImg;
 
     @Column(name = "contentDuration")
     private Integer contentDuration;
 
     @Column(name = "contentStatus", length = 50)
-    private String contentStatus;
-
-    @Column(name = "sequenceOrder")
-    private Integer sequenceOrder;
+    private boolean contentStatus;
 
 
 	public Content() {
@@ -51,20 +42,16 @@ public class Content {
 	}
 
 
-	public Content(Long contentId, Course course, String contentTitle, String contentDescription, String contentType,
-			String contentData, String contentURL, Integer contentDuration, String contentStatus,
-			Integer sequenceOrder) {
+	public Content(Long contentId, Course course, String contentTitle, String contentDescription, String contentImg,
+			Integer contentDuration, boolean contentStatus) {
 		super();
 		this.contentId = contentId;
 		this.course = course;
 		this.contentTitle = contentTitle;
 		this.contentDescription = contentDescription;
-		this.contentType = contentType;
-		this.contentData = contentData;
-		this.contentURL = contentURL;
+		this.contentImg = contentImg;
 		this.contentDuration = contentDuration;
 		this.contentStatus = contentStatus;
-		this.sequenceOrder = sequenceOrder;
 	}
 
 
@@ -108,33 +95,13 @@ public class Content {
 	}
 
 
-	public String getContentType() {
-		return contentType;
+	public String getContentImg() {
+		return contentImg;
 	}
 
 
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-
-	public String getContentData() {
-		return contentData;
-	}
-
-
-	public void setContentData(String contentData) {
-		this.contentData = contentData;
-	}
-
-
-	public String getContentURL() {
-		return contentURL;
-	}
-
-
-	public void setContentURL(String contentURL) {
-		this.contentURL = contentURL;
+	public void setContentImg(String contentImg) {
+		this.contentImg = contentImg;
 	}
 
 
@@ -148,22 +115,13 @@ public class Content {
 	}
 
 
-	public String getContentStatus() {
+	public boolean isContentStatus() {
 		return contentStatus;
 	}
 
 
-	public void setContentStatus(String contentStatus) {
+	public void setContentStatus(boolean contentStatus) {
 		this.contentStatus = contentStatus;
 	}
-
-
-	public Integer getSequenceOrder() {
-		return sequenceOrder;
-	}
-
-
-	public void setSequenceOrder(Integer sequenceOrder) {
-		this.sequenceOrder = sequenceOrder;
-	}
+	
 }

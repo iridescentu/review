@@ -35,7 +35,7 @@ public class Course {
 	private Integer durationMins;
 	
 	@Lob
-	@Column(nullable = false, length = 500)
+	@Column(nullable = true, length = 500)
 	private byte[] courseThumbnail;
 	    
 	@Column(nullable = false)

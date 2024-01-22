@@ -16,7 +16,7 @@ public class CourseDto {
     
 	private Integer durationMins;
 
-	private MultipartFile courseThumbnail;
+	private byte[] courseThumbnail;
 
 	private String contentLevel;
 
@@ -29,7 +29,7 @@ public class CourseDto {
 	}
 
 	public CourseDto(Long courseId, Subject subject, String courseName, String description, Integer durationMins,
-			MultipartFile courseThumbnail, String contentLevel, Integer price, String announcement) {
+			byte[] courseThumbnail, String contentLevel, Integer price, String announcement) {
 		super();
 		this.courseId = courseId;
 		this.subject = subject;
@@ -82,11 +82,11 @@ public class CourseDto {
 		this.durationMins = durationMins;
 	}
 
-	public MultipartFile getCourseThumbnail() {
+	public byte[] getCourseThumbnail() {
 		return courseThumbnail;
 	}
 
-	public void setCourseThumbnail(MultipartFile courseThumbnail) {
+	public void setCourseThumbnail(byte[] courseThumbnail) {
 		this.courseThumbnail = courseThumbnail;
 	}
 
