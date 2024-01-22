@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.lms.dto.ResponseDto;
 import project.lms.model.Exam;
 import project.lms.service.ExamService;
 
@@ -29,7 +30,7 @@ public class ExamController {
 	}
 	
 	@GetMapping("/exam")
-	public List<Exam> getAllExams(){
+	public ResponseDto<List<Exam>> getAllExams(){
 		return examService.getAllExams();
 	}
 	

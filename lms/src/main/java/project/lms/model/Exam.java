@@ -1,7 +1,9 @@
 package project.lms.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -17,7 +20,7 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "exams")
 public class Exam {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long examId;
@@ -25,39 +28,40 @@ public class Exam {
     @ManyToOne
     @JoinColumn(name = "courseId", nullable = false)
     private Course course;
-
-    @Column(name = "examDate")
+    
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime examDate;
 
-    private Integer numQuestions;
+    // 답안 수정
+    @JsonIgnore
+    @OneToMany(mappedBy = "exam")
+    private List<ExamQuestion> examQuestions;
 
+    @Column(nullable = false)
     private Integer durationMins;
 
+    @Column(nullable = false)
     private Integer passingScore;
 
-    private boolean examIsActive;
-    
-    private String correctAnswer;
+    @Column(name = "examIsActive")
+    private Boolean examIsActive;
 
-    // 기본 생성자
-    public Exam() {
-  
-    }
-
-	public Exam(Long examId, Course course, LocalDateTime examDate, Integer numQuestions, Integer durationMins,
-			Integer passingScore, boolean examIsActive, String correctAnswer) {
+	public Exam() {
+		super();
+	}
+	
+	public Exam(Long examId, Course course, LocalDateTime examDate, List<ExamQuestion> examQuestions,
+			Integer durationMins, Integer passingScore, Boolean examIsActive) {
 		super();
 		this.examId = examId;
 		this.course = course;
 		this.examDate = examDate;
-		this.numQuestions = numQuestions;
+		this.examQuestions = examQuestions;
 		this.durationMins = durationMins;
 		this.passingScore = passingScore;
 		this.examIsActive = examIsActive;
-		this.correctAnswer = correctAnswer;
 	}
-
+	
 	public Long getExamId() {
 		return examId;
 	}
@@ -82,12 +86,12 @@ public class Exam {
 		this.examDate = examDate;
 	}
 
-	public Integer getNumQuestions() {
-		return numQuestions;
+	public List<ExamQuestion> getExamQuestions() {
+		return examQuestions;
 	}
 
-	public void setNumQuestions(Integer numQuestions) {
-		this.numQuestions = numQuestions;
+	public void setExamQuestions(List<ExamQuestion> examQuestions) {
+		this.examQuestions = examQuestions;
 	}
 
 	public Integer getDurationMins() {
@@ -106,21 +110,15 @@ public class Exam {
 		this.passingScore = passingScore;
 	}
 
-	public boolean isExamIsActive() {
+	public Boolean getExamIsActive() {
 		return examIsActive;
 	}
 
-	public void setExamIsActive(boolean examIsActive) {
+	public void setExamIsActive(Boolean examIsActive) {
 		this.examIsActive = examIsActive;
 	}
 
-	public String getCorrectAnswer() {
-		return correctAnswer;
+	public Integer getNumQuestions() {
+		return examQuestions != null ? examQuestions.size() : 0;
 	}
-
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-
-   
 }

@@ -1,5 +1,6 @@
 package project.lms.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,37 +15,41 @@ public class ExamQuestion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long questionId;
+	private Long examQuestionId;
 	
 	@ManyToOne
 	@JoinColumn(name = "examId", nullable = false)
 	private Exam exam;
 	
+	@Column(nullable = false)
 	private String questionText;
 	
-	private String[] options;
+	@Column(nullable = false)
+	private String options;
 	
+	@Column(nullable = false)
 	private Integer correctOptionIndex;
 
 	public ExamQuestion() {
 		super();
 	}
 
-	public ExamQuestion(Long questionId, Exam exam, String questionText, String[] options, Integer correctOptionIndex) {
+	public ExamQuestion(Long examQuestionId, Exam exam, String questionText, String options,
+			Integer correctOptionIndex) {
 		super();
-		this.questionId = questionId;
+		this.examQuestionId = examQuestionId;
 		this.exam = exam;
 		this.questionText = questionText;
 		this.options = options;
 		this.correctOptionIndex = correctOptionIndex;
 	}
 
-	public Long getQuestionId() {
-		return questionId;
+	public Long getExamQuestionId() {
+		return examQuestionId;
 	}
 
-	public void setQuestionId(Long questionId) {
-		this.questionId = questionId;
+	public void setExamQuestionId(Long examQuestionId) {
+		this.examQuestionId = examQuestionId;
 	}
 
 	public Exam getExam() {
@@ -63,11 +68,11 @@ public class ExamQuestion {
 		this.questionText = questionText;
 	}
 
-	public String[] getOptions() {
+	public String getOptions() {
 		return options;
 	}
 
-	public void setOptions(String[] options) {
+	public void setOptions(String options) {
 		this.options = options;
 	}
 
