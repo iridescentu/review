@@ -1,6 +1,6 @@
 package project.lms.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -21,8 +21,7 @@ public class ExamCalendar {
 	
 	private String testName;
 	
-	@Temporal(TemporalType.DATE)
-	private Date testDate;
+	private LocalDate testDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime startTime;
@@ -32,8 +31,7 @@ public class ExamCalendar {
 	
 	private String location;
 	
-	@Temporal(TemporalType.DATE)
-	private Date registrationDeadline;
+	private LocalDate registrationDeadline;
 	
 	private Integer maxApplicants;
 	
@@ -49,9 +47,9 @@ public class ExamCalendar {
 		super();
 	}
 
-	public ExamCalendar(Long testId, String testName, Date testDate, LocalDateTime startTime, LocalDateTime endTime,
-			String location, Date registrationDeadline, Integer maxApplicants, Integer currentApplicants,
-			Boolean isOnline, String additionalInfo, Integer price) {
+	public ExamCalendar(Long testId, String testName, LocalDate testDate, LocalDateTime startTime,
+			LocalDateTime endTime, String location, LocalDate registrationDeadline, Integer maxApplicants,
+			Integer currentApplicants, Boolean isOnline, String additionalInfo, Integer price) {
 		super();
 		this.testId = testId;
 		this.testName = testName;
@@ -83,11 +81,11 @@ public class ExamCalendar {
 		this.testName = testName;
 	}
 
-	public Date getTestDate() {
+	public LocalDate getTestDate() {
 		return testDate;
 	}
 
-	public void setTestDate(Date testDate) {
+	public void setTestDate(LocalDate testDate) {
 		this.testDate = testDate;
 	}
 
@@ -115,11 +113,11 @@ public class ExamCalendar {
 		this.location = location;
 	}
 
-	public Date getRegistrationDeadline() {
+	public LocalDate getRegistrationDeadline() {
 		return registrationDeadline;
 	}
 
-	public void setRegistrationDeadline(Date registrationDeadline) {
+	public void setRegistrationDeadline(LocalDate registrationDeadline) {
 		this.registrationDeadline = registrationDeadline;
 	}
 
@@ -162,6 +160,4 @@ public class ExamCalendar {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-
-	
 }

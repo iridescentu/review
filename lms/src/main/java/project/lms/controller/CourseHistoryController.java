@@ -1,40 +1,133 @@
 package project.lms.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import project.lms.dto.ResponseDto;
+import project.lms.model.Course;
 import project.lms.model.CourseHistory;
+import project.lms.model.Member;
 import project.lms.service.CourseHistoryService;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
-@RequestMapping("/test")
-@CrossOrigin(origins="http://localhost:3000",
-methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT })
 public class CourseHistoryController {
 
-	private final CourseHistoryService courseHistoryService;
+    private final CourseHistoryService courseHistoryService;
 
-	@Autowired
-	public CourseHistoryController(CourseHistoryService courseHistoryService) {
-		super();
-		this.courseHistoryService = courseHistoryService;
-	}
-	
-	@GetMapping("/coursehistory")
-	public List<CourseHistory> getAllCourseHistories(){
-		return courseHistoryService.getAllCourseHistories();
-	}
-	
-	@PostMapping("/coursehistory")
-	public CourseHistory createCourseHistory(@RequestBody CourseHistory courseHistory) {
-		return courseHistoryService.createCourseHistory(courseHistory);
-	}
+    @Autowired
+    public CourseHistoryController(CourseHistoryService courseHistoryService) {
+        this.courseHistoryService = courseHistoryService;
+    }
+
+    // 특정 회원의 수강 이력 조회
+    @GetMapping("/courseHistory/member/{memberId}")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getCourseHistoryByMember(@PathVariable Long memberId) {
+        Member member = new Member();
+        member.setMemberId(memberId);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getCourseHistoryByMember(member);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 강좌의 수강 이력 조회
+    @GetMapping("/courseHistory/course/{courseId}")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getCourseHistoryByCourse(@PathVariable Long courseId) {
+        Course course = new Course();
+        course.setCourseId(courseId);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getCourseHistoryByCourse(course);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 날짜 범위 내의 수강 이력 조회
+    @GetMapping("/courseHistory/dateRange")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getCourseHistoryInDateRange(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate) {
+
+        LocalDate startLocalDate = LocalDate.parse(startDate);
+        LocalDate endLocalDate = LocalDate.parse(endDate);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getCourseHistoryInDateRange(startLocalDate, endLocalDate);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 회원과 강좌의 수강 이력 조회
+    @GetMapping("/courseHistory/memberAndCourse")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getCourseHistoryByMemberAndCourse(
+            @RequestParam("memberId") Long memberId,
+            @RequestParam("courseId") Long courseId) {
+
+        Member member = new Member();
+        member.setMemberId(memberId);
+
+        Course course = new Course();
+        course.setCourseId(courseId);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getCourseHistoryByMemberAndCourse(member, course);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 종료일이 null인(아직 종료되지 않은) 수강 이력 조회
+    @GetMapping("/courseHistory/ongoing")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getOngoingCourseHistory() {
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getOngoingCourseHistory();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 날짜 이후에 종료된 수강 이력 조회
+    @GetMapping("/courseHistory/endedAfter")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getCourseHistoryEndedAfter(
+            @RequestParam("date") String date) {
+
+        LocalDate endLocalDate = LocalDate.parse(date);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getCourseHistoryEndedAfter(endLocalDate);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 회원의 가장 최근 수강 이력 조회
+    @GetMapping("/courseHistory/latestForMember/{memberId}")
+    public ResponseEntity<ResponseDto<CourseHistory>> getLatestCourseHistoryForMember(@PathVariable Long memberId) {
+        Member member = new Member();
+        member.setMemberId(memberId);
+
+        ResponseDto<CourseHistory> response = courseHistoryService.getLatestCourseHistoryForMember(member);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 특정 강좌의 수강 이력 개수 조회
+    @GetMapping("/courseHistory/countByCourse/{courseId}")
+    public ResponseEntity<ResponseDto<Long>> getCourseHistoryCountByCourse(@PathVariable Long courseId) {
+        Course course = new Course();
+        course.setCourseId(courseId);
+
+        ResponseDto<Long> response = courseHistoryService.getCourseHistoryCountByCourse(course);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 종료일이 null이고 시작일이 특정 날짜 이전인 수강 이력 조회
+    @GetMapping("/courseHistory/ongoingBeforeDate")
+    public ResponseEntity<ResponseDto<List<CourseHistory>>> getOngoingCourseHistoryBeforeDate(
+            @RequestParam("date") String date) {
+
+        LocalDate startLocalDate = LocalDate.parse(date);
+
+        ResponseDto<List<CourseHistory>> response = courseHistoryService.getOngoingCourseHistoryBeforeDate(startLocalDate);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 삭제 부분은 필요하면 courseHistoryService와 courseHistoryServiceImpl에서 정의 후 주석 풀어 주면 됨
+    // @DeleteMapping("/courseHistory/delete/{courseHistoryId}")
+    // public ResponseEntity<ResponseDto<String>> deleteCourseHistory(@PathVariable Long courseHistoryId) {
+    //     ResponseDto<String> response = courseHistoryService.deleteCourseHistory(courseHistoryId);
+    //     return ResponseEntity.status(HttpStatus.OK).body(response);
+    // }
 }

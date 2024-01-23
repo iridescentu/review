@@ -32,6 +32,7 @@ import project.lms.enumstatus.Nationality;
 		@UniqueConstraint(name = "uk_member_phoneNum", 
 			columnNames = {"phoneNum"})
 	})
+
 public class Member {
 	
 	@Id

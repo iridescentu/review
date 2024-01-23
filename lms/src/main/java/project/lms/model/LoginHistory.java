@@ -30,14 +30,14 @@ public class LoginHistory {
     private String ipAddress;
     
     @Column(nullable = false)
-    private String status;
+    private boolean status;
 
     // 기본 생성자
     public LoginHistory() {
         super();
     }
 
-	public LoginHistory(Long logId, Member member, LocalDateTime loginTime, String ipAddress, String status) {
+	public LoginHistory(Long logId, Member member, LocalDateTime loginTime, String ipAddress, boolean status) {
 		super();
 		this.logId = logId;
 		this.member = member;
@@ -78,11 +78,11 @@ public class LoginHistory {
 		this.ipAddress = ipAddress;
 	}
 
-	public String getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

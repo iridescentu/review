@@ -1,6 +1,5 @@
 package project.lms.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -11,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "courseHistory")
@@ -20,7 +17,7 @@ public class CourseHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseHistoryID;
+    private Long courseHistoryId;
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)
@@ -31,28 +28,28 @@ public class CourseHistory {
     private Course course;
 
     @Column(name = "startDate")
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
+    private LocalDate startDate;
+    
+    private LocalDate endDate;
 
     // 기본 생성자
     public CourseHistory() {
-
     }
 
-	public CourseHistory(Long courseHistoryID, Member member, Course course, Date startDate) {
-		super();
-		this.courseHistoryID = courseHistoryID;
-		this.member = member;
-		this.course = course;
-		this.startDate = startDate;
+    public CourseHistory(Long courseHistoryId, Member member, Course course, LocalDate startDate, LocalDate endDate) {
+        this.courseHistoryId = courseHistoryId;
+        this.member = member;
+        this.course = course;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+	public Long getCourseHistoryId() {
+		return courseHistoryId;
 	}
 
-	public Long getCourseHistoryID() {
-		return courseHistoryID;
-	}
-
-	public void setCourseHistoryID(Long courseHistoryID) {
-		this.courseHistoryID = courseHistoryID;
+	public void setCourseHistoryId(Long courseHistoryId) {
+		this.courseHistoryId = courseHistoryId;
 	}
 
 	public Member getMember() {
@@ -71,13 +68,20 @@ public class CourseHistory {
 		this.course = course;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-    
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
 }

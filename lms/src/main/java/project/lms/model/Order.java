@@ -1,11 +1,12 @@
 package project.lms.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,6 +15,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import project.lms.enumstatus.OrderStatus;
+import project.lms.enumstatus.PaymentStatus;
 
 @Entity
 @Table(name = "orders")
@@ -38,8 +41,8 @@ public class Order {
 	// double, float는 특정 범위 내에서만 값을 표현하기 때문에 큰 금액을 다루는 경우에는 오버플로우 문제가 발생할 수 있으므로
 	// BigDecimal을 사용해 주었음
 	
-	@Column(name = "status")
-    private String status;
+	@Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Column(name = "address")
     private String address;
@@ -60,8 +63,8 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime paymentDate;
 
-    @Column(name = "paymentStatus")
-    private String paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
     @Column(name = "OrdertotalAmount")
     private Integer orderTotalAmount;
@@ -70,15 +73,15 @@ public class Order {
 		super();
 	}
 
-	public Order(Long orderId, Member member, LocalDateTime orderDate, BigDecimal totalAmount, String status,
+	public Order(Long orderId, Member member, LocalDateTime orderDate, BigDecimal totalAmount, OrderStatus orderStatus,
 			String address, Integer phoneNum, String email, String deliveryMessage, String paymentMethod,
-			LocalDateTime paymentDate, String paymentStatus, Integer orderTotalAmount) {
+			LocalDateTime paymentDate, PaymentStatus paymentStatus, Integer orderTotalAmount) {
 		super();
 		this.orderId = orderId;
 		this.member = member;
 		this.orderDate = orderDate;
 		this.totalAmount = totalAmount;
-		this.status = status;
+		this.orderStatus = orderStatus;
 		this.address = address;
 		this.phoneNum = phoneNum;
 		this.email = email;
@@ -121,12 +124,12 @@ public class Order {
 		this.totalAmount = totalAmount;
 	}
 
-	public String getStatus() {
-		return status;
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public String getAddress() {
@@ -177,11 +180,11 @@ public class Order {
 		this.paymentDate = paymentDate;
 	}
 
-	public String getPaymentStatus() {
+	public PaymentStatus getPaymentStatus() {
 		return paymentStatus;
 	}
 
-	public void setPaymentStatus(String paymentStatus) {
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
 

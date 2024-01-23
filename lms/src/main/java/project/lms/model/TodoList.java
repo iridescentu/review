@@ -1,6 +1,6 @@
 package project.lms.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -36,15 +36,14 @@ public class TodoList {
 	
 	private Boolean isCompleted;
 	
-	@Temporal(TemporalType.DATE)
-	private Date completionDate;
+	private LocalDate completionDate;
 
 	public TodoList() {
 		super();
 	}
 
 	public TodoList(Long taskId, Member member, String taskName, String description, LocalDateTime dueDate,
-			Integer priority, Boolean isCompleted, Date completionDate) {
+			Integer priority, Boolean isCompleted, LocalDate completionDate) {
 		super();
 		this.taskId = taskId;
 		this.member = member;
@@ -112,13 +111,12 @@ public class TodoList {
 		this.isCompleted = isCompleted;
 	}
 
-	public Date getCompletionDate() {
+	public LocalDate getCompletionDate() {
 		return completionDate;
 	}
 
-	public void setCompletionDate(Date completionDate) {
+	public void setCompletionDate(LocalDate completionDate) {
 		this.completionDate = completionDate;
 	}
 
-	
 }
