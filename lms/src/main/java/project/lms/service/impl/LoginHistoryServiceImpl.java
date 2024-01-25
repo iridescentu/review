@@ -38,7 +38,7 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
     }
 
     @Override
-    // 로그인 이력을 저장하는 메서드 구현. LoginHistory 객체를 인자로 받아서 저장합니다.
+    // 로그인 이력을 저장하는 메서드 구현. LoginHistory 객체를 받아서 저장
     public LoginHistory save(LoginHistory loginHistory) {
         return loginHistoryRepository.save(loginHistory); // LoginHistoryRepository의 save 메서드를 호출하여 LoginHistory 객체를 저장
     }
