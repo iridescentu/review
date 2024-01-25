@@ -20,8 +20,10 @@ import project.lms.exception.InvalidRequestException;
 import project.lms.model.Authority;
 import project.lms.model.Member;
 import project.lms.model.Withdrawal;
+import project.lms.model.LoginHistory;  // LoginHistory 모델을 import 합니다.
 import project.lms.repository.MemberRepository;
 import project.lms.repository.WithdrawalRepository;
+import project.lms.repository.LoginHistoryRepository;  // LoginHistoryRepository를 import 합니다.
 import project.lms.service.MemberService;
 import project.lms.util.SecurityUtil;
 
@@ -33,15 +35,20 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private final WithdrawalRepository withdrawalRepository;
+
+	// LoginHistoryRepository를 Autowired로 주입.
+	@Autowired
+	private final LoginHistoryRepository loginHistoryRepository;
 	
 	private final PasswordEncoder passwordEncoder;
 	
 	public MemberServiceImpl(MemberRepository memberRepository, WithdrawalRepository withdrawalRepository,
-			PasswordEncoder passwordEncoder) {
+			PasswordEncoder passwordEncoder, LoginHistoryRepository loginHistoryRepository) {
 		super();
 		this.memberRepository = memberRepository;
 		this.withdrawalRepository = withdrawalRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.loginHistoryRepository = loginHistoryRepository;  // 초기화
 	}
 
 	@Transactional
@@ -83,6 +90,13 @@ public class MemberServiceImpl implements MemberService {
 		Member member = memberRepository.findByLoginId(memberLoginDto.getLoginId());
 		if(member != null &&
 				 passwordEncoder.matches(memberLoginDto.getPassword(), member.getPassword())) {
+
+			// 로그인 성공 시 LoginHistory 객체 생성 및 저장
+			LoginHistory loginHistory = new LoginHistory();
+			loginHistory.setMember(member);
+			loginHistory.setLoginTime(LocalDateTime.now());
+			loginHistoryRepository.save(loginHistory);
+
 			return new ResponseDto<MemberLoginDto>(
 					ResultCode.SUCCESS.name(),
 					memberLoginDto,

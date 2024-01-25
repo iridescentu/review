@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -24,15 +24,14 @@ import project.lms.enumstatus.Nationality;
 
 @Entity
 @Table(name = "members", 
-	uniqueConstraints = { 
-		@UniqueConstraint(name = "uk_member_loginId", 
-			columnNames = {"loginId"}),
-		@UniqueConstraint(name = "uk_member_email", 
-			columnNames = {"email"}),
-		@UniqueConstraint(name = "uk_member_phoneNum", 
-			columnNames = {"phoneNum"})
-	})
-
+    uniqueConstraints = { 
+        @UniqueConstraint(name = "uk_member_loginId", 
+            columnNames = {"loginId"}),
+        @UniqueConstraint(name = "uk_member_email", 
+            columnNames = {"email"}),
+        @UniqueConstraint(name = "uk_member_phoneNum", 
+            columnNames = {"phoneNum"})
+    })
 public class Member {
 	
 	@Id
@@ -82,6 +81,10 @@ public class Member {
 	private String photo;
 	
 	private String resume;
+	
+	// 로그인 이력을 저장하는 필드
+    @OneToMany(mappedBy = "member")
+    private Set<LoginHistory> loginHistories;
 
 	public Member() {
 		super();
@@ -89,7 +92,7 @@ public class Member {
 
 	public Member(Long memberId, Set<Authority> authorities, String loginId, String password, String name,
 			LocalDate birthDate, Gender gender, Nationality nationality, String email, String phoneNum,
-			LocalDateTime joinDate, boolean isActive, String photo, String resume) {
+			LocalDateTime joinDate, boolean isActive, String photo, String resume, Set<LoginHistory> loginHistories) {
 		super();
 		this.memberId = memberId;
 		this.authorities = authorities;
@@ -105,6 +108,7 @@ public class Member {
 		this.isActive = isActive;
 		this.photo = photo;
 		this.resume = resume;
+		this.loginHistories = loginHistories;
 	}
 
 	public Long getMemberId() {
@@ -219,5 +223,12 @@ public class Member {
 		this.resume = resume;
 	}
 
+	public Set<LoginHistory> getLoginHistories() {
+		return loginHistories;
+	}
+
+	public void setLoginHistories(Set<LoginHistory> loginHistories) {
+		this.loginHistories = loginHistories;
+	}
 
 }

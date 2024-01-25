@@ -30,4 +30,8 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long> {
 
     // 특정 학생과 우선순위, 완료 여부에 따라 TodoList를 가져오는 메서드
     List<TodoList> findByMemberAndPriorityAndIsCompleted(Member member, Integer priority, Boolean isCompleted);
+    
+    // TodoList를 우선순위에 따라 내림차순으로 정렬하여 가져오는 쿼리 메서드
+    List<TodoList> findAllByOrderByPriorityDesc();
+
 }

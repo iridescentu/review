@@ -21,13 +21,21 @@ public class Notification {
 	private Long notificationId;
 	
 	@ManyToOne
-	@JoinColumn(name = "memberId", nullable = false)
-	private Member member;
+	@JoinColumn(name = "senderId", nullable = false)
+	private Member sender;  // 알림을 보내는 주체
 	
-	private String notificationText;
+	@ManyToOne
+	@JoinColumn(name = "receiverId", nullable = false)
+	private Member receiver;  // 알림을 받는 주체
+	
+	@ManyToOne
+    @JoinColumn(name = "courseId")
+    private Course course;  // 관련 강좌
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime notificationDate;
+	
+	private String notificationText;
 	
 	private Boolean isRead;
 	
@@ -37,13 +45,15 @@ public class Notification {
 		super();
 	}
 
-	public Notification(Long notificationId, Member member, String notificationText, LocalDateTime notificationDate,
-			Boolean isRead, String notificationType) {
+	public Notification(Long notificationId, Member sender, Member receiver, Course course,
+			LocalDateTime notificationDate, String notificationText, Boolean isRead, String notificationType) {
 		super();
 		this.notificationId = notificationId;
-		this.member = member;
-		this.notificationText = notificationText;
+		this.sender = sender;
+		this.receiver = receiver;
+		this.course = course;
 		this.notificationDate = notificationDate;
+		this.notificationText = notificationText;
 		this.isRead = isRead;
 		this.notificationType = notificationType;
 	}
@@ -56,20 +66,28 @@ public class Notification {
 		this.notificationId = notificationId;
 	}
 
-	public Member getMember() {
-		return member;
+	public Member getSender() {
+		return sender;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setSender(Member sender) {
+		this.sender = sender;
 	}
 
-	public String getNotificationText() {
-		return notificationText;
+	public Member getReceiver() {
+		return receiver;
 	}
 
-	public void setNotificationText(String notificationText) {
-		this.notificationText = notificationText;
+	public void setReceiver(Member receiver) {
+		this.receiver = receiver;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public LocalDateTime getNotificationDate() {
@@ -78,6 +96,14 @@ public class Notification {
 
 	public void setNotificationDate(LocalDateTime notificationDate) {
 		this.notificationDate = notificationDate;
+	}
+
+	public String getNotificationText() {
+		return notificationText;
+	}
+
+	public void setNotificationText(String notificationText) {
+		this.notificationText = notificationText;
 	}
 
 	public Boolean getIsRead() {

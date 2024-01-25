@@ -53,6 +53,21 @@ public class TodoListServiceImpl implements TodoListService {
             throw new InvalidRequestException("TodoList 저장 중 오류가 발생하였습니다.", e.getMessage());
         }
     }
+    
+    @Override
+    public ResponseDto<TodoList> updateTodoList(Long taskId, TodoList todoList) {
+        Optional<TodoList> optionalTodoList = todoListRepository.findById(taskId);
+        if (optionalTodoList.isPresent()) {
+            TodoList existingTodoList = optionalTodoList.get();
+            existingTodoList.setTaskName(todoList.getTaskName()); // 수정된 부분
+            existingTodoList.setDescription(todoList.getDescription());
+            TodoList updatedTodoList = todoListRepository.save(existingTodoList);
+            return new ResponseDto<>(ResultCode.SUCCESS.name(), updatedTodoList, "TodoList를 성공적으로 수정하였습니다.");
+        } else {
+            return new ResponseDto<>(ResultCode.ERROR.name(), null, "TodoList를 찾을 수 없습니다.");
+        }
+    }
+
 
     @Transactional
     @Override
@@ -100,4 +115,16 @@ public class TodoListServiceImpl implements TodoListService {
         List<TodoList> todoList = todoListRepository.findByMemberAndPriorityAndIsCompleted(member, priority, isCompleted);
         return new ResponseDto<>(ResultCode.SUCCESS.name(), todoList, "TodoList를 성공적으로 조회하였습니다.");
     }
+    
+    @Override
+    // TodoList를 우선순위에 따라 정렬하여 가져오는 메서드 구현
+    public ResponseDto<List<TodoList>> getAllTodoListsSortedByPriority() {
+    // TodoListRepository의 findAllByOrderByPriorityDesc 메서드를 호출하여
+    // 우선순위에 따라 내림차순으로 정렬된 TodoList를 가져옴
+    List<TodoList> todoList = todoListRepository.findAllByOrderByPriorityDesc();
+    // 정렬된 TodoList와 메시지를 포함하는 ResponseDto를 반환
+    return new ResponseDto<>(ResultCode.SUCCESS.name(), todoList, "TodoList를 성공적으로 조회하였습니다.");
+ }
+
+
 }

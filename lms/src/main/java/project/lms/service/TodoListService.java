@@ -18,6 +18,9 @@ public interface TodoListService {
 
     // TodoList를 저장하는 메서드
     ResponseDto<TodoList> saveTodoList(TodoList todoList);
+    
+    // TodoList를 수정하는 메서드
+    ResponseDto<TodoList> updateTodoList(Long taskId, TodoList todoList);
 
     // TodoList를 삭제하는 메서드
     ResponseDto<Void> deleteTodoList(Long taskId);
@@ -36,4 +39,8 @@ public interface TodoListService {
 
     // 특정 학생과 우선순위, 완료 여부에 따라 TodoList를 가져오는 메서드
     ResponseDto<List<TodoList>> getTodoListByMemberAndPriorityAndIsCompleted(Member member, Integer priority, Boolean isCompleted);
+
+    // TodoList를 우선순위에 따라 정렬하여 가져오는 메서드
+    ResponseDto<List<TodoList>> getAllTodoListsSortedByPriority();
+
 }

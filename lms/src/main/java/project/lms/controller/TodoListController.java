@@ -48,6 +48,13 @@ public class TodoListController {
         ResponseDto<TodoList> responseDto = todoListService.saveTodoList(todoList);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
+    
+    // TodoList를 수정하는 엔드포인트
+    @PutMapping("/todolist/update/{taskId}")
+    public ResponseEntity<ResponseDto<TodoList>> updateTodoList(@PathVariable Long taskId, @RequestBody TodoList todoList) {
+        ResponseDto<TodoList> responseDto = todoListService.updateTodoList(taskId, todoList);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
 
     // TodoList를 삭제하는 엔드포인트
     @DeleteMapping("/todolist/delete/{taskId}")
@@ -95,4 +102,11 @@ public class TodoListController {
         ResponseDto<List<TodoList>> responseDto = todoListService.getTodoListByMemberAndPriorityAndIsCompleted(member, priority, isCompleted);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
+
+    // 우선순위에 따라 정렬된 TodoList를 가져오는 API 엔드포인트
+    @GetMapping("/todolist/sortedByPriority")
+    public ResponseDto<List<TodoList>> getAllTodoListsSortedByPriority() {
+        return todoListService.getAllTodoListsSortedByPriority();
+    }
+
 }
