@@ -29,7 +29,6 @@ public class LoginHistory {
     @Column(nullable = false)
     private LocalDateTime loginTime;
 
-    @Column(nullable = false, length = 50)
     private String ipAddress;
    
 
@@ -37,7 +36,6 @@ public class LoginHistory {
     public LoginHistory() {
         super();
     }
-
 
 	public LoginHistory(Long logId, Member member, LocalDateTime loginTime, String ipAddress) {
 		super();
@@ -47,44 +45,37 @@ public class LoginHistory {
 		this.ipAddress = ipAddress;
 	}
 
-
 	public Long getLogId() {
 		return logId;
 	}
-
 
 	public void setLogId(Long logId) {
 		this.logId = logId;
 	}
 
-
 	public Member getMember() {
 		return member;
 	}
-
 
 	public void setMember(Member member) {
 		this.member = member;
 	}
 
-
 	public LocalDateTime getLoginTime() {
 		return loginTime;
 	}
-
 
 	public void setLoginTime(LocalDateTime loginTime) {
 		this.loginTime = loginTime;
 	}
 
-
 	public String getIpAddress() {
 		return ipAddress;
 	}
-
 
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
 
+	
 }
