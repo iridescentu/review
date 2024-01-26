@@ -1,15 +1,12 @@
 package project.lms.model;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "contact")
@@ -34,8 +31,7 @@ public class Contact {
 
 	private String website;
 
-	@Temporal(TemporalType.DATE)
-	private Date registrationDate;
+	private LocalDate registrationDate;
 
 	private String additionalInfo;
 
@@ -44,7 +40,7 @@ public class Contact {
 	}
 
 	public Contact(Long companyId, String companyName, String phoneNumber, String email, String contactPersonName,
-			String address, String website, Date registrationDate, String additionalInfo) {
+			String address, String website, LocalDate registrationDate, String additionalInfo) {
 		super();
 		this.companyId = companyId;
 		this.companyName = companyName;
@@ -113,11 +109,11 @@ public class Contact {
 		this.website = website;
 	}
 
-	public Date getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -128,6 +124,5 @@ public class Contact {
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
-
 	
 }

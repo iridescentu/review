@@ -2,13 +2,15 @@ package project.lms.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "announcements")
@@ -18,9 +20,13 @@ public class Announcement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long announcementId;
 	
+	@ManyToOne
+	@JoinColumn(name = "memberId", nullable = false)
+	private Member member;  // 공지사항을 작성한 사용자
+	
 	private String announcementText;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private LocalDateTime announcementDate;
 	
 	private Boolean isImportant;
@@ -29,10 +35,11 @@ public class Announcement {
 		super();
 	}
 
-	public Announcement(Long announcementId, String announcementText, LocalDateTime announcementDate,
+	public Announcement(Long announcementId, Member member, String announcementText, LocalDateTime announcementDate,
 			Boolean isImportant) {
 		super();
 		this.announcementId = announcementId;
+		this.member = member;
 		this.announcementText = announcementText;
 		this.announcementDate = announcementDate;
 		this.isImportant = isImportant;
@@ -44,6 +51,14 @@ public class Announcement {
 
 	public void setAnnouncementId(Long announcementId) {
 		this.announcementId = announcementId;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public String getAnnouncementText() {
@@ -69,5 +84,5 @@ public class Announcement {
 	public void setIsImportant(Boolean isImportant) {
 		this.isImportant = isImportant;
 	}
-	
+
 }
