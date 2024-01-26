@@ -42,6 +42,7 @@ public class AuthController {
 //    @Autowired
 //    private MemberService memberService;  // MemberService를 주입 받음
     
+    // loginId를 사용해 Member 객체를 불러오기 위해 @Autowired를 사용해 MemberRepository를 주입받음
     @Autowired
     private MemberRepository memberRepository;
     
@@ -79,7 +80,8 @@ public class AuthController {
 				// LoginHistory에서 받을 정보 추가 필요
 				// 로그인 이력 생성 및 저장
 			    LoginHistory loginHistory = new LoginHistory();
-			    Member member = memberRepository.findByLoginId(memberLoginDto.getLoginId());  // loginId를 사용하여 Member 객체 불러오기
+			    // loginId를 사용하여 Member 객체 불러오기
+			    Member member = memberRepository.findByLoginId(memberLoginDto.getLoginId()); 
 			    // 로그인 이력에 Member 객체를 설정
 			    loginHistory.setMember(member); 
 			    loginHistory.setLoginTime(LocalDateTime.now()); // 현재 시간을 로그인 시간으로 설정
