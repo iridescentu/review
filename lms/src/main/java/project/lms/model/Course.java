@@ -17,7 +17,7 @@ public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long courseId;
-	
+
 	@ManyToOne
     @JoinColumn(name = "subjectId")
     private Subject subject;
@@ -31,6 +31,7 @@ public class Course {
 	@Column(nullable = false)	    
 	private Integer durationMins;
 	
+	// 일단 비워도 되게 테스트 해보려고
 	@Lob
 	@Column(nullable = true, length = 500)
 	private byte[] courseThumbnail;
@@ -48,8 +49,8 @@ public class Course {
 		super();
 	}
 
-	public Course(Long courseId, Subject subject, String courseName, String description, Integer durationMins,
-			byte[] courseThumbnail, String contentLevel, Integer price, String announcement) {
+	public Course(Long courseId, Subject subject, String courseName, String description,
+			Integer durationMins, byte[] courseThumbnail, String contentLevel, Integer price, String announcement) {
 		super();
 		this.courseId = courseId;
 		this.subject = subject;

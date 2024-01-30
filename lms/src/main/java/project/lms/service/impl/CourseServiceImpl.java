@@ -1,14 +1,11 @@
 package project.lms.service.impl;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
 import project.lms.dto.CourseDto;
 import project.lms.dto.ResponseDto;
 import project.lms.enumstatus.ResultCode;
@@ -83,11 +80,6 @@ public class CourseServiceImpl implements CourseService {
             throw new InvalidRequestException("Error saving course with thumbnail.", e.getMessage());
         }
     }
-
-
-
-
-
 
     public Optional<Course> getCourseWithThumbnail(Long courseId) {
         return courseRepository.findById(courseId);

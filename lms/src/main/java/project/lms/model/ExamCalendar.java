@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -18,6 +20,10 @@ public class ExamCalendar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long testId;
+	
+	@ManyToOne
+    @JoinColumn(name = "subjectId")
+    private Subject subject;
 	
 	private String testName;
 	
@@ -33,36 +39,38 @@ public class ExamCalendar {
 	
 	private LocalDate registrationDeadline;
 	
+	private String additionalInfo;
+	
+	private Integer price;
+	
+	// 아래의 세 가지는 필요할까?
 	private Integer maxApplicants;
 	
 	private Integer currentApplicants;
 	
 	private Boolean isOnline;
-	
-	private String additionalInfo;
-	
-	private Integer price;
 
 	public ExamCalendar() {
 		super();
 	}
 
-	public ExamCalendar(Long testId, String testName, LocalDate testDate, LocalDateTime startTime,
-			LocalDateTime endTime, String location, LocalDate registrationDeadline, Integer maxApplicants,
-			Integer currentApplicants, Boolean isOnline, String additionalInfo, Integer price) {
+	public ExamCalendar(Long testId, Subject subject, String testName, LocalDate testDate, LocalDateTime startTime,
+			LocalDateTime endTime, String location, LocalDate registrationDeadline, String additionalInfo,
+			Integer price, Integer maxApplicants, Integer currentApplicants, Boolean isOnline) {
 		super();
 		this.testId = testId;
+		this.subject = subject;
 		this.testName = testName;
 		this.testDate = testDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.location = location;
 		this.registrationDeadline = registrationDeadline;
+		this.additionalInfo = additionalInfo;
+		this.price = price;
 		this.maxApplicants = maxApplicants;
 		this.currentApplicants = currentApplicants;
 		this.isOnline = isOnline;
-		this.additionalInfo = additionalInfo;
-		this.price = price;
 	}
 
 	public Long getTestId() {
@@ -71,6 +79,14 @@ public class ExamCalendar {
 
 	public void setTestId(Long testId) {
 		this.testId = testId;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	public String getTestName() {
@@ -121,6 +137,22 @@ public class ExamCalendar {
 		this.registrationDeadline = registrationDeadline;
 	}
 
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
 	public Integer getMaxApplicants() {
 		return maxApplicants;
 	}
@@ -145,19 +177,4 @@ public class ExamCalendar {
 		this.isOnline = isOnline;
 	}
 
-	public String getAdditionalInfo() {
-		return additionalInfo;
-	}
-
-	public void setAdditionalInfo(String additionalInfo) {
-		this.additionalInfo = additionalInfo;
-	}
-
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
 }
