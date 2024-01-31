@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,10 +21,8 @@ import project.lms.exception.InvalidRequestException;
 import project.lms.model.Authority;
 import project.lms.model.Member;
 import project.lms.model.Withdrawal;
-import project.lms.model.LoginHistory;  // LoginHistory 모델을 import 합니다.
 import project.lms.repository.MemberRepository;
 import project.lms.repository.WithdrawalRepository;
-import project.lms.repository.LoginHistoryRepository;  // LoginHistoryRepository를 import 합니다.
 import project.lms.service.MemberService;
 import project.lms.util.SecurityUtil;
 
@@ -35,20 +34,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private final WithdrawalRepository withdrawalRepository;
-
-	// LoginHistoryRepository를 Autowired로 주입.
-	@Autowired
-	private final LoginHistoryRepository loginHistoryRepository;
 	
 	private final PasswordEncoder passwordEncoder;
 	
 	public MemberServiceImpl(MemberRepository memberRepository, WithdrawalRepository withdrawalRepository,
-			PasswordEncoder passwordEncoder, LoginHistoryRepository loginHistoryRepository) {
+			PasswordEncoder passwordEncoder) {
 		super();
 		this.memberRepository = memberRepository;
 		this.withdrawalRepository = withdrawalRepository;
 		this.passwordEncoder = passwordEncoder;
-		this.loginHistoryRepository = loginHistoryRepository;  // 초기화
 	}
 
 	@Transactional
@@ -77,7 +71,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberRepository.save(member);
 		
-		// 회원가입 성공 후 해당 회원 정보 뜨게
 		MemberDto createdMemberDto = MemberDto.from(member);
 		return new ResponseDto<>(
 				ResultCode.SUCCESS.name(),
@@ -90,13 +83,6 @@ public class MemberServiceImpl implements MemberService {
 		Member member = memberRepository.findByLoginId(memberLoginDto.getLoginId());
 		if(member != null &&
 				 passwordEncoder.matches(memberLoginDto.getPassword(), member.getPassword())) {
-
-			// 로그인 성공 시 LoginHistory 객체 생성 및 저장
-			LoginHistory loginHistory = new LoginHistory();
-			loginHistory.setMember(member);
-			loginHistory.setLoginTime(LocalDateTime.now());
-			loginHistoryRepository.save(loginHistory);
-
 			return new ResponseDto<MemberLoginDto>(
 					ResultCode.SUCCESS.name(),
 					memberLoginDto,
@@ -106,16 +92,25 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	// admin 모든 강사 조회
+	@Override
+    public List<Member> getAllInstructors(){
+		return memberRepository.findAllByAuthorities_AuthorityName("ROLE_INSTRUCTOR");
+	}
+	
 	// admin 권한이 DB에서 member 정보를 찾아 옴
 	@Transactional(readOnly = true)
 	public MemberDto getMemberWithAuthorities(String loginId) {
-		return MemberDto.from(memberRepository.findOneWithAuthoritiesByLoginId(loginId).orElseThrow(() -> new InvalidRequestException(loginId, "member not found")));
+		return MemberDto.from(memberRepository.findOneWithAuthoritiesByLoginId(loginId)
+				.orElseThrow(() -> new InvalidRequestException(loginId, "member not found")));
 	}
 	
 	// member, admin 상관없이 사용, SecurityContextHolder 안의 정보를 찾아옴
 	@Transactional(readOnly = true)
 	public MemberDto getCurrentMemberWithAuthorities() {
-		return MemberDto.from(SecurityUtil.getCurrentloginId().flatMap(memberRepository::findOneWithAuthoritiesByLoginId).orElseThrow(() -> new InvalidRequestException("No current member", "member not found")));
+		return MemberDto.from(SecurityUtil.getCurrentloginId()
+				.flatMap(memberRepository::findOneWithAuthoritiesByLoginId)
+				.orElseThrow(() -> new InvalidRequestException("No current member", "member not found")));
 	}
 		
 }

@@ -27,7 +27,6 @@ public class CourseHistory {
     @JoinColumn(name = "courseId", nullable = false)
     private Course course;
 
-    @Column(name = "startDate")
     private LocalDate startDate;
     
     private LocalDate endDate;

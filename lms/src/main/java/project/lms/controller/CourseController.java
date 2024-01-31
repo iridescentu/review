@@ -19,42 +19,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.lms.dto.CourseDto;
 import project.lms.dto.ResponseDto;
-import project.lms.model.Course;
 import project.lms.service.CourseService;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins="http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+@RequestMapping("/api/course")
+@CrossOrigin(origins="http://localhost:3000",
+methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class CourseController {
-	
-	private final CourseService courseService;
 
-    @Autowired
+	private final CourseService courseService;
+	
+	@Autowired
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
+	
+	@PostMapping("/save")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<ResponseDto<CourseDto>> saveCourse(@RequestBody CourseDto courseDto) {
+        ResponseDto<CourseDto> response = courseService.saveCourse(courseDto);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
-    @PostMapping("/course/save")
-    public ResponseEntity<ResponseDto<CourseDto>> saveCourseWithThumbnail(@RequestBody CourseDto courseDto) {
-        ResponseDto<CourseDto> response = courseService.saveCourseWithThumbnail(courseDto);
+    @GetMapping("/list")
+    public ResponseEntity<ResponseDto<List<CourseDto>>> getAllCourses() {
+        ResponseDto<List<CourseDto>> courseDtos = courseService.getAllCourses();
+        return new ResponseEntity<>(courseDtos, HttpStatus.OK);
+    }
+    
+    @GetMapping("/list/{courseId}")
+    public ResponseEntity<ResponseDto<CourseDto>> getCourse(@PathVariable Long courseId) {
+        ResponseDto<CourseDto> response = courseService.getCourseByCourseId(courseId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
+    @GetMapping("/subject/{subjectId}")
+    public ResponseEntity<ResponseDto<List<CourseDto>>> getCoursesForSubject(@PathVariable Long subjectId) {
+        ResponseDto<List<CourseDto>> response = courseService.getCoursesBySubjectId(subjectId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/course/{courseId}")
-    public ResponseEntity<Course> getCourseWithThumbnail(@PathVariable Long courseId) {
-        return courseService.getCourseWithThumbnail(courseId)
-                .map(course -> new ResponseEntity<>(course, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("/course")
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseService.getAllCourses();
-        return new ResponseEntity<>(courses, HttpStatus.OK);
-    }
-
-    @PutMapping("/course/update/{courseId}")
-	@PreAuthorize("hasAnyRole('INSTRUCTOR')")
+    @PutMapping("/update/{courseId}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<ResponseDto<CourseDto>> updateCourse(
 			@PathVariable Long courseId,
 			@RequestBody CourseDto courseDto) {
@@ -62,8 +68,8 @@ public class CourseController {
 		return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 	}
     
-    @DeleteMapping("/course/delete/{courseId}")
-	@PreAuthorize("hasAnyRole('INSTRUCTOR')")
+    @DeleteMapping("/delete/{courseId}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<ResponseDto<String>> deleteCourse(@PathVariable Long courseId) {
 		ResponseDto<String> reponseDto = courseService.deleteCourse(courseId);
 		return ResponseEntity.status(HttpStatus.OK).body(reponseDto);

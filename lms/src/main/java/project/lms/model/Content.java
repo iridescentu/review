@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "contents")
 public class Content {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contentId;
 
@@ -23,102 +23,86 @@ public class Content {
 
     @Column(name = "contentTitle", length = 30, nullable = false)
     private String contentTitle;
-
-    @Column(name = "contentDescription", columnDefinition = "TEXT")
-    private String contentDescription;
-
+    
+    @Column(name = "description", length = 100, nullable = false)
+    private String description;
+    
+    @Column(name = "contentDuration", length = 50, nullable = false)
+    private Integer contentDuration;
+    
     @Column(name = "contentImg")
     private String contentImg;
-
-    @Column(name = "contentDuration")
-    private Integer contentDuration;
-
-    @Column(name = "contentStatus", length = 50)
+    
+    @Column(name = "contentStatus")
     private boolean contentStatus;
-
 
 	public Content() {
 		super();
 	}
 
-
-	public Content(Long contentId, Course course, String contentTitle, String contentDescription, String contentImg,
-			Integer contentDuration, boolean contentStatus) {
+	public Content(Long contentId, Course course, String contentTitle, String description, Integer contentDuration,
+			String contentImg, boolean contentStatus) {
 		super();
 		this.contentId = contentId;
 		this.course = course;
 		this.contentTitle = contentTitle;
-		this.contentDescription = contentDescription;
-		this.contentImg = contentImg;
+		this.description = description;
 		this.contentDuration = contentDuration;
+		this.contentImg = contentImg;
 		this.contentStatus = contentStatus;
 	}
-
 
 	public Long getContentId() {
 		return contentId;
 	}
 
-
 	public void setContentId(Long contentId) {
 		this.contentId = contentId;
 	}
-
 
 	public Course getCourse() {
 		return course;
 	}
 
-
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-
 
 	public String getContentTitle() {
 		return contentTitle;
 	}
 
-
 	public void setContentTitle(String contentTitle) {
 		this.contentTitle = contentTitle;
 	}
 
-
-	public String getContentDescription() {
-		return contentDescription;
+	public String getDescription() {
+		return description;
 	}
 
-
-	public void setContentDescription(String contentDescription) {
-		this.contentDescription = contentDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-
-	public String getContentImg() {
-		return contentImg;
-	}
-
-
-	public void setContentImg(String contentImg) {
-		this.contentImg = contentImg;
-	}
-
 
 	public Integer getContentDuration() {
 		return contentDuration;
 	}
 
-
 	public void setContentDuration(Integer contentDuration) {
 		this.contentDuration = contentDuration;
 	}
 
+	public String getContentImg() {
+		return contentImg;
+	}
+
+	public void setContentImg(String contentImg) {
+		this.contentImg = contentImg;
+	}
 
 	public boolean isContentStatus() {
 		return contentStatus;
 	}
-
 
 	public void setContentStatus(boolean contentStatus) {
 		this.contentStatus = contentStatus;

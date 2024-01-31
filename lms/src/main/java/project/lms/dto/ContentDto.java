@@ -1,59 +1,29 @@
 package project.lms.dto;
 
-import project.lms.model.Course;
-
 public class ContentDto {
 	
-	private Long contentId;
-	
-	private Course course;
-	
+	private Long courseId;
 	private String contentTitle;
-	
-	private String contentType;
-	
-	private String contentData;
-	
-	private String contentURL;
-	
+	private String description;
 	private Integer contentDuration;
+	private String contentImg;
 	
-	private String contentStatus;
-	
-	private Integer sequenceOrder;
-
-	public ContentDto() {
+	public ContentDto(Long courseId, String contentTitle, String description, Integer contentDuration,
+			String contentImg) {
 		super();
-	}
-
-	public ContentDto(Long contentId, Course course, String contentTitle, String contentType, String contentData,
-			String contentURL, Integer contentDuration, String contentStatus, Integer sequenceOrder) {
-		super();
-		this.contentId = contentId;
-		this.course = course;
+		this.courseId = courseId;
 		this.contentTitle = contentTitle;
-		this.contentType = contentType;
-		this.contentData = contentData;
-		this.contentURL = contentURL;
+		this.description = description;
 		this.contentDuration = contentDuration;
-		this.contentStatus = contentStatus;
-		this.sequenceOrder = sequenceOrder;
+		this.contentImg = contentImg;
 	}
 
-	public Long getContentId() {
-		return contentId;
+	public Long getCourseId() {
+		return courseId;
 	}
 
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
 
 	public String getContentTitle() {
@@ -64,28 +34,12 @@ public class ContentDto {
 		this.contentTitle = contentTitle;
 	}
 
-	public String getContentType() {
-		return contentType;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public String getContentData() {
-		return contentData;
-	}
-
-	public void setContentData(String contentData) {
-		this.contentData = contentData;
-	}
-
-	public String getContentURL() {
-		return contentURL;
-	}
-
-	public void setContentURL(String contentURL) {
-		this.contentURL = contentURL;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getContentDuration() {
@@ -96,21 +50,12 @@ public class ContentDto {
 		this.contentDuration = contentDuration;
 	}
 
-	public String getContentStatus() {
-		return contentStatus;
+	public String getContentImg() {
+		return contentImg;
 	}
 
-	public void setContentStatus(String contentStatus) {
-		this.contentStatus = contentStatus;
+	public void setContentImg(String contentImg) {
+		this.contentImg = contentImg;
 	}
-
-	public Integer getSequenceOrder() {
-		return sequenceOrder;
-	}
-
-	public void setSequenceOrder(Integer sequenceOrder) {
-		this.sequenceOrder = sequenceOrder;
-	}
-
-
+	
 }
