@@ -22,10 +22,13 @@ public class ExamResultServiceImpl implements ExamResultService {
 
 	@Autowired
 	private final ExamResultRepository examResultRepository;
+	
 	@Autowired
 	private final ExamQuestionRepository examQuestionRepository;
+	
 	@Autowired
     private MemberRepository memberRepository;
+	
     @Autowired
     private ExamRepository examRepository;
 	

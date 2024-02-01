@@ -2,7 +2,6 @@ package project.lms.model;
 
 import java.util.List;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -25,6 +24,8 @@ public class ExamQuestion {
 	@JoinColumn(name = "examId", nullable = false)
 	private Exam exam;
 	
+	private String questionParagraph;
+	
 	@Column(nullable = false)
 	private String questionText;
 	
@@ -39,11 +40,12 @@ public class ExamQuestion {
 		super();
 	}
 
-	public ExamQuestion(Long examQuestionId, Exam exam, String questionText, List<String> options,
-			Integer correctOptionIndex) {
+	public ExamQuestion(Long examQuestionId, Exam exam, String questionParagraph, String questionText,
+			List<String> options, Integer correctOptionIndex) {
 		super();
 		this.examQuestionId = examQuestionId;
 		this.exam = exam;
+		this.questionParagraph = questionParagraph;
 		this.questionText = questionText;
 		this.options = options;
 		this.correctOptionIndex = correctOptionIndex;
@@ -63,6 +65,14 @@ public class ExamQuestion {
 
 	public void setExam(Exam exam) {
 		this.exam = exam;
+	}
+
+	public String getQuestionParagraph() {
+		return questionParagraph;
+	}
+
+	public void setQuestionParagraph(String questionParagraph) {
+		this.questionParagraph = questionParagraph;
 	}
 
 	public String getQuestionText() {

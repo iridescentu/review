@@ -1,8 +1,6 @@
 package project.lms.dto;
 
-import project.lms.model.Exam;
 import project.lms.model.ExamHistory;
-import project.lms.model.Member;
 
 public class ExamHistoryDto {
 

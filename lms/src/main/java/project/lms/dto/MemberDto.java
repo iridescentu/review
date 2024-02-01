@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import project.lms.enumstatus.Gender;
 import project.lms.enumstatus.Nationality;
-import project.lms.model.Authority;
 import project.lms.model.Member;
 
 public class MemberDto {
