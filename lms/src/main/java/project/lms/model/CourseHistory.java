@@ -2,7 +2,6 @@ package project.lms.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,18 +29,23 @@ public class CourseHistory {
     private LocalDate startDate;
     
     private LocalDate endDate;
+    
+    private boolean contentStatus;
 
     // 기본 생성자
     public CourseHistory() {
     }
 
-    public CourseHistory(Long courseHistoryId, Member member, Course course, LocalDate startDate, LocalDate endDate) {
-        this.courseHistoryId = courseHistoryId;
-        this.member = member;
-        this.course = course;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+	public CourseHistory(Long courseHistoryId, Member member, Course course, LocalDate startDate, LocalDate endDate,
+			boolean contentStatus) {
+		super();
+		this.courseHistoryId = courseHistoryId;
+		this.member = member;
+		this.course = course;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.contentStatus = contentStatus;
+	}
 
 	public Long getCourseHistoryId() {
 		return courseHistoryId;
@@ -81,6 +85,14 @@ public class CourseHistory {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+
+	public boolean isContentStatus() {
+		return contentStatus;
+	}
+
+	public void setContentStatus(boolean contentStatus) {
+		this.contentStatus = contentStatus;
 	}
 
 }
