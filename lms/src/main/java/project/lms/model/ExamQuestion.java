@@ -2,6 +2,7 @@ package project.lms.model;
 
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -28,7 +29,7 @@ public class ExamQuestion {
 	private String questionText;
 	
 	@ElementCollection
-	@Column(nullable = false)
+    @Column(nullable = false)
 	private List<String> options;
 	
 	@Column(nullable = false)

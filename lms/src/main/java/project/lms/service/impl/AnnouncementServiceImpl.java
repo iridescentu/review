@@ -15,8 +15,7 @@ import project.lms.service.NotificationService;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
-
-    @Autowired
+	@Autowired
     private AnnouncementRepository announcementRepository;
     
     @Autowired
@@ -54,12 +53,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         existingAnnouncement.setAnnouncementText(announcement.getAnnouncementText());
         existingAnnouncement.setAnnouncementDate(announcement.getAnnouncementDate());
         existingAnnouncement.setIsImportant(announcement.getIsImportant());
-        announcementRepository.save(existingAnnouncement);
+        Announcement updatedAnnouncement = announcementRepository.save(existingAnnouncement);
 
         // 공지사항 수정 알림 전송 로직
         sendNotificationToAllUsers(member, "공지사항이 수정되었습니다.");
 
-        return existingAnnouncement;
+        return updatedAnnouncement;
     }
     
     // 공지사항 삭제

@@ -33,17 +33,17 @@ public class AnnouncementController {
     @GetMapping("/announcement")
     public ResponseEntity<List<Announcement>> getAllAnnouncements() {
         List<Announcement> announcements = announcementService.getAllAnnouncements();
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(announcements, HttpStatus.OK);
     }
 
     @PostMapping("/announcement/save")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<String> saveAnnouncement(@RequestBody Announcement announcement) {
+    public ResponseEntity<Announcement> saveAnnouncement(@RequestBody Announcement announcement) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Member member = memberRepository.findByLoginId(username); // findByUsername에서 findByLoginId로 변경
         Announcement savedAnnouncement = announcementService.saveAnnouncement(announcement, member);
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        return new ResponseEntity<>(savedAnnouncement, HttpStatus.CREATED);
     }
 
     @PutMapping("/announcement/update/{announcementId}")
@@ -51,9 +51,12 @@ public class AnnouncementController {
     public ResponseEntity<Announcement> updateAnnouncement(@PathVariable Long announcementId, @RequestBody Announcement announcement) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Member member = memberRepository.findByLoginId(username); // findByUsername에서 findByLoginId로 변경
+        Member member = memberRepository.findByLoginId(username);
+
+        // 업데이트된 공지사항을 반환하도록 수정
         Announcement updatedAnnouncement = announcementService.updateAnnouncement(announcement, member);
-        return new ResponseEntity<>(updatedAnnouncement, HttpStatus.OK); // 테스트할 때 일단 updatedAnnouncement 부분을 null로 바꾸고 하기
+
+        return new ResponseEntity<>(updatedAnnouncement, HttpStatus.OK);
     }
 
     @DeleteMapping("/announcement/delete/{announcementId}")

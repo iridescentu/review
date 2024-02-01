@@ -1,5 +1,6 @@
 package project.lms.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class ExamHistory {
     @JoinColumn(name = "memberId", nullable = false)
     private Member member;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST) // ExamHistory 객체를 저장할 때 exam 필드에 설정된 Exam 객체도 함께 저장하라는 것을 나타
     @JoinColumn(name = "examId", nullable = false)
     private Exam exam;
     
