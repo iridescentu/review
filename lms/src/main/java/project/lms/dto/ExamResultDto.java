@@ -1,35 +1,74 @@
 package project.lms.dto;
 
-import project.lms.model.ExamResult;
-
 public class ExamResultDto {
-    private ExamResult examResult;
+	private Long examResultId;
+    private MemberDto member;
+    private ExamDto exam;
+    private int submittedAnswer;
+    private String wrongAnsExpl;
     private Long questionId;
 
     // 기본 생성자
     public ExamResultDto() {
     }
 
-    // 모든 필드를 매개변수로 받는 생성자
-    public ExamResultDto(ExamResult examResult, Long questionId) {
-        this.examResult = examResult;
-        this.questionId = questionId;
-    }
+	public ExamResultDto(Long examResultId, MemberDto member, ExamDto exam, int submittedAnswer, String wrongAnsExpl,
+			Long questionId) {
+		super();
+		this.examResultId = examResultId;
+		this.member = member;
+		this.exam = exam;
+		this.submittedAnswer = submittedAnswer;
+		this.wrongAnsExpl = wrongAnsExpl;
+		this.questionId = questionId;
+	}
 
-    // getter, setter
-    public ExamResult getExamResult() {
-        return examResult;
-    }
+	public Long getExamResultId() {
+		return examResultId;
+	}
 
-    public void setExamResult(ExamResult examResult) {
-        this.examResult = examResult;
-    }
+	public void setExamResultId(Long examResultId) {
+		this.examResultId = examResultId;
+	}
 
-    public Long getQuestionId() {
-        return questionId;
-    }
+	public MemberDto getMember() {
+		return member;
+	}
 
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
-    }
+	public void setMember(MemberDto member) {
+		this.member = member;
+	}
+
+	public ExamDto getExam() {
+		return exam;
+	}
+
+	public void setExam(ExamDto exam) {
+		this.exam = exam;
+	}
+
+	public int getSubmittedAnswer() {
+		return submittedAnswer;
+	}
+
+	public void setSubmittedAnswer(int submittedAnswer) {
+		this.submittedAnswer = submittedAnswer;
+	}
+
+	public String getWrongAnsExpl() {
+		return wrongAnsExpl;
+	}
+
+	public void setWrongAnsExpl(String wrongAnsExpl) {
+		this.wrongAnsExpl = wrongAnsExpl;
+	}
+
+	public Long getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(Long questionId) {
+		this.questionId = questionId;
+	}
+
 }
