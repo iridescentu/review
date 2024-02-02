@@ -24,7 +24,7 @@ public class ExamQuestion {
 	@JoinColumn(name = "examId", nullable = false)
 	private Exam exam;
 	
-	private String questionParagraph;
+	private String questParagraph;
 	
 	@Column(nullable = false)
 	private String questionText;
@@ -35,20 +35,23 @@ public class ExamQuestion {
 	
 	@Column(nullable = false)
 	private Integer correctOptionIndex;
+	
+	private String wrongAnsExpl;
 
 	public ExamQuestion() {
 		super();
 	}
 
-	public ExamQuestion(Long examQuestionId, Exam exam, String questionParagraph, String questionText,
-			List<String> options, Integer correctOptionIndex) {
+	public ExamQuestion(Long examQuestionId, Exam exam, String questParagraph, String questionText,
+			List<String> options, Integer correctOptionIndex, String wrongAnsExpl) {
 		super();
 		this.examQuestionId = examQuestionId;
 		this.exam = exam;
-		this.questionParagraph = questionParagraph;
+		this.questParagraph = questParagraph;
 		this.questionText = questionText;
 		this.options = options;
 		this.correctOptionIndex = correctOptionIndex;
+		this.wrongAnsExpl = wrongAnsExpl;
 	}
 
 	public Long getExamQuestionId() {
@@ -67,12 +70,12 @@ public class ExamQuestion {
 		this.exam = exam;
 	}
 
-	public String getQuestionParagraph() {
-		return questionParagraph;
+	public String getQuestParagraph() {
+		return questParagraph;
 	}
 
-	public void setQuestionParagraph(String questionParagraph) {
-		this.questionParagraph = questionParagraph;
+	public void setQuestParagraph(String questParagraph) {
+		this.questParagraph = questParagraph;
 	}
 
 	public String getQuestionText() {
@@ -97,6 +100,14 @@ public class ExamQuestion {
 
 	public void setCorrectOptionIndex(Integer correctOptionIndex) {
 		this.correctOptionIndex = correctOptionIndex;
+	}
+
+	public String getWrongAnsExpl() {
+		return wrongAnsExpl;
+	}
+
+	public void setWrongAnsExpl(String wrongAnsExpl) {
+		this.wrongAnsExpl = wrongAnsExpl;
 	}
 	
 }
