@@ -2,6 +2,8 @@ package project.lms.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "courseReviews")
@@ -35,8 +35,7 @@ public class CourseReview {
     @Column(nullable = true, length = 2000) // 리뷰 내용은 필수가 아닐 수 있음
     private String comment;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private LocalDateTime reviewDate;
 
     // 기본 생성자

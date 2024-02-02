@@ -1,6 +1,8 @@
 package project.lms.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,17 +38,16 @@ public class QnABoard {
     @Column(columnDefinition = "text")
     private String content;
     
-    @Column(name = "createdAt", nullable = false)
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     // 기본 생성자
     public QnABoard() {
 
     }
 
-    // 전체 생성자
-    public QnABoard(Long qnaId, Course course, Member member, String title, String description, String content,
-			Timestamp createdAt) {
+	public QnABoard(Long qnaId, Course course, Member member, String title, String description, String content,
+			LocalDateTime createdAt) {
 		super();
 		this.qnaId = qnaId;
 		this.course = course;
@@ -56,62 +57,61 @@ public class QnABoard {
 		this.content = content;
 		this.createdAt = createdAt;
 	}
-    
-    // Getter and Setter methods
-    public Long getQnaId() {
-        return qnaId;
-    }
 
-    public void setQnaId(Long qnaId) {
-        this.qnaId = qnaId;
-    }
+	public Long getQnaId() {
+		return qnaId;
+	}
 
-    public Course getCourse() {
-        return course;
-    }
+	public void setQnaId(Long qnaId) {
+		this.qnaId = qnaId;
+	}
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+	public Course getCourse() {
+		return course;
+	}
 
-    public Member getMember() {
-        return member;
-    }
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
+	public Member getMember() {
+		return member;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
 }
