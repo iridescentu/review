@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,9 +34,8 @@ public class QnABoard {
     @CreationTimestamp
     private LocalDateTime createdAt;
     
-    @ManyToOne
-    @JoinColumn(name = "createdBy", nullable = false)
-    private Member createdBy;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt; // 수정 시간
     
 
     // 기본 생성자
@@ -45,53 +43,75 @@ public class QnABoard {
 
     }
 
-	public QnABoard(Long qnaId, Course course, Member member, String questionText, LocalDateTime createdAt) {
+	public QnABoard(Long qnaId, Course course, Member member, String questionText, LocalDateTime createdAt,
+			LocalDateTime updatedAt) {
 		super();
 		this.qnaId = qnaId;
 		this.course = course;
 		this.member = member;
 		this.questionText = questionText;
 		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
+
 
 	public Long getQnaId() {
 		return qnaId;
 	}
 
+
 	public void setQnaId(Long qnaId) {
 		this.qnaId = qnaId;
 	}
+
 
 	public Course getCourse() {
 		return course;
 	}
 
+
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
 
 	public Member getMember() {
 		return member;
 	}
 
+
 	public void setMember(Member member) {
 		this.member = member;
 	}
+
 
 	public String getQuestionText() {
 		return questionText;
 	}
 
+
 	public void setQuestionText(String questionText) {
 		this.questionText = questionText;
 	}
+
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

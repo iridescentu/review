@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import project.lms.dto.CourseHistoryDto;
 import project.lms.dto.ResponseDto;
 import project.lms.model.Course;
 import project.lms.model.CourseHistory;
@@ -44,10 +45,18 @@ public class CourseHistoryController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseDto<List<CourseHistory>>> getMyCourseHistories() {
-		ResponseDto<List<CourseHistory>> courseHistories = courseHistoryService.getMyCourseHistories();
-		return new ResponseEntity<>(courseHistories, HttpStatus.OK);
+	public ResponseEntity<ResponseDto<List<CourseHistoryDto>>> getMyCourseHistories() {
+		ResponseDto<List<CourseHistoryDto>> courseHistoryDtos = courseHistoryService.getMyCourseHistories();
+		return new ResponseEntity<>(courseHistoryDtos, HttpStatus.OK);
 	}
+	
+	// 수료증 자격 업데이트
+		@PutMapping("/update-status/{courseHistoryId}")
+		public ResponseEntity<ResponseDto<CourseHistoryDto>> updateCourseHistoryStatus(@PathVariable Long courseHistoryId) {
+			ResponseDto<CourseHistoryDto> courseHistoryDto = courseHistoryService.updateCourseHistoryStatus(courseHistoryId);
+			return new ResponseEntity<>(courseHistoryDto, HttpStatus.OK);
+		}
+	
 }
 
 //@RestController
