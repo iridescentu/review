@@ -7,10 +7,11 @@ import java.util.List;
 
 import project.lms.dto.MemberDto;
 import project.lms.dto.MemberLoginDto;
+import project.lms.dto.MemberSignUpDto;
 
 public interface MemberService {
 	
-	public ResponseDto<MemberDto> signUp(MemberDto memberDto);
+	public ResponseDto<MemberSignUpDto> signUp(MemberSignUpDto memberSignUpDto);
 	
 	public ResponseDto<MemberLoginDto> login(MemberLoginDto memberLoginDto);
 	

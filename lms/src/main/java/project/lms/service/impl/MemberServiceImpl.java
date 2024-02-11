@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.lms.dto.ResponseDto;
 import project.lms.dto.MemberDto;
 import project.lms.dto.MemberLoginDto;
+import project.lms.dto.MemberSignUpDto;
 import project.lms.enumstatus.Gender;
 import project.lms.enumstatus.Nationality;
 import project.lms.enumstatus.ResultCode;
@@ -46,9 +47,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Transactional
-	public ResponseDto<MemberDto> signUp(MemberDto memberDto){
-		if(memberRepository.findOneWithAuthoritiesByLoginId(memberDto.getLoginId()).orElse(null) != null) {
-			throw new InvalidRequestException(memberDto.getLoginId(), "이미 등록된 ID 입니다.");
+	public ResponseDto<MemberSignUpDto> signUp(MemberSignUpDto memberSignUpDto){
+		if(memberRepository.findOneWithAuthoritiesByLoginId(memberSignUpDto.getLoginId()).orElse(null) != null) {
+			throw new InvalidRequestException(memberSignUpDto.getLoginId(), "이미 등록된 ID 입니다.");
 		}
 		
 		Authority authority = new Authority();
@@ -57,21 +58,21 @@ public class MemberServiceImpl implements MemberService {
 		Member member = new Member();
 		member.setMemberId(null);
 		member.setAuthorities(Collections.singleton(authority));
-		member.setLoginId(memberDto.getLoginId());
-		member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-		member.setName(memberDto.getName());
-		member.setBirthDate(LocalDate.parse(memberDto.getBirthDate(),
+		member.setLoginId(memberSignUpDto.getLoginId());
+		member.setPassword(passwordEncoder.encode(memberSignUpDto.getPassword()));
+		member.setName(memberSignUpDto.getName());
+		member.setBirthDate(LocalDate.parse(memberSignUpDto.getBirthDate(),
 				DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		member.setGender(Gender.valueOf(memberDto.getGender()));
-		member.setNationality(Nationality.valueOf(memberDto.getNationality()));
-		member.setEmail(memberDto.getEmail());
-		member.setPhoneNum(memberDto.getPhoneNum());
+		member.setGender(Gender.valueOf(memberSignUpDto.getGender()));
+		member.setNationality(Nationality.valueOf(memberSignUpDto.getNationality()));
+		member.setEmail(memberSignUpDto.getEmail());
+		member.setPhoneNum(memberSignUpDto.getPhoneNum());
 		member.setActive(true);
 		member.setJoinDate(LocalDateTime.now());
 		
 		memberRepository.save(member);
 		
-		MemberDto createdMemberDto = MemberDto.from(member);
+		MemberSignUpDto createdMemberDto = MemberSignUpDto.from(member);
 		return new ResponseDto<>(
 				ResultCode.SUCCESS.name(),
 				createdMemberDto,

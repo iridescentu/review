@@ -22,6 +22,7 @@ import project.lms.dto.ResponseDto;
 import project.lms.enumstatus.ResultCode;
 import project.lms.model.Member;
 import project.lms.dto.MemberDto;
+import project.lms.dto.MemberSignUpDto;
 import project.lms.service.MemberService;
 
 @RestController
@@ -39,8 +40,8 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<ResponseDto<MemberDto>> signUp(@RequestBody @Valid MemberDto memberDto) {
-		ResponseDto<MemberDto> responseDto = memberService.signUp(memberDto);
+	public ResponseEntity<ResponseDto<MemberSignUpDto>> signUp(@RequestBody @Valid MemberSignUpDto memberSignUpDto) {
+		ResponseDto<MemberSignUpDto> responseDto = memberService.signUp(memberSignUpDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
 	}    
 	
