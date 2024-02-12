@@ -35,7 +35,7 @@ public class QnAReplyServiceImpl implements QnAReplyService {
 
     // 권한을 확인해 로그인한 선생님이 강의 중인 Course의 QnABoard에만 QnAReply를 작성할 수 있도록
     @Override
-    public ResponseDto<QnAReplyDto> createQnAReply(QnAReplyDto qnaReplyDto, Long qnaId, Long memberId) {
+    public ResponseDto<QnAReplyDto> createQnAReply(QnAReplyDto qnaReplyDto, Long memberId,  Long qnaId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new InvalidRequestException("Member not found", "해당 회원을 찾을 수 없습니다."));
         QnABoard qnaBoard = qnaBoardRepository.findById(qnaId)

@@ -45,14 +45,19 @@ public class TodoListServiceImpl implements TodoListService {
     @Transactional
     @Override
     public ResponseDto<TodoList> saveTodoList(TodoList todoList) {
+        if (todoList.getMember() == null || todoList.getMember().getMemberId() == null) {
+            return new ResponseDto<>(ResultCode.ERROR.name(), null, "memberId cannot be null");
+        }
+
         try {
             TodoList savedTodoList = todoListRepository.save(todoList);
             return new ResponseDto<>(ResultCode.SUCCESS.name(), savedTodoList, "TodoList를 성공적으로 저장하였습니다.");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new InvalidRequestException("TodoList 저장 중 오류가 발생하였습니다.", e.getMessage());
+            return new ResponseDto<>(ResultCode.ERROR.name(), null, "TodoList 저장 중 오류가 발생하였습니다.");
         }
     }
+
     
     @Override
     public ResponseDto<TodoList> updateTodoList(Long taskId, TodoList todoList) {

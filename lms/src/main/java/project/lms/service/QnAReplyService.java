@@ -14,7 +14,7 @@ public interface QnAReplyService {
     ResponseDto<List<QnAReplyDto>> getQnARepliesByQnABoardId(Long qnaId);
     
     ResponseDto<QnAReplyDto> createQnAReply(QnAReplyDto qnaReplyDto, Long memberId, Long qnaId);
-
+    
     ResponseDto<String> deleteQnAReply(Long replyId);
 
     
